@@ -1,12 +1,11 @@
-import "./App.css"
+import "./LandingPage.css"
 
-function App() {
+function LandingPage() {
     return (
         <div
-            className="App"
+            className="LandingPage"
             style={{ height: window.innerHeight, width: window.innerWidth }}
         ></div>
     )
 }
-
-export default App
+export default LandingPage
