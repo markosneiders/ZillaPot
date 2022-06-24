@@ -1,0 +1,38 @@
+.ConnectButton {
+    background-image: linear-gradient(
+        to right,
+        #0d262b 0%,
+        #266970 51%,
+        #0d262b 100%
+    );
+    margin: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    transition: 0.5s;
+    background-size: 200%;
+    color: white;
+    border-radius: 20px;
+    border: none;
+    display: flex;
+    box-shadow: 0 0 20px #000;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.ConnectButton:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: white;
+    text-decoration: none;
+}
+.ConnectButton__image {
+    margin-left: 16px;
+}
+.ConnectButton__text {
+    background-image: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.9),
+        rgba(255, 255, 255, 0.5)
+    );
+    background-clip: text;
+    color: transparent;
+}
