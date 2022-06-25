@@ -1,6 +1,7 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import "./Pots.css"
 
+import TempData from "./TempData.json"
 import Pot from "../../components/Pot/Pot"
 import ScrollAnimation from "react-animate-on-scroll"
 import Select from "react-select"
@@ -8,10 +9,13 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight"
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft"
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
+import { ListItem } from "@mui/material"
 
 function Pots() {
     const [potSelection, setPotSelection] = useState(0)
     const [sort, setSort] = useState({ type: "Value", direction: "Descending" })
+    const [rawData, setRawData] = useState(TempData)
+    const [sortedData, setSortedData] = useState([{}])
     // const addr = window.zilPay.wallet.defaultAccount.bech32
 
     // function getBalance() {
@@ -19,11 +23,62 @@ function Pots() {
     //         console.log(resp)
     //     })
     // }
-    const data = {
-        id: "#3473346343",
-        timeLeft: "19h 15m 6s",
-        potSize: 5374,
-        contributions: 17,
+
+    useEffect(() => {
+        getData()
+        sortData()
+    }, [])
+
+    useEffect(() => {
+        sortData()
+    }, [sort])
+
+    async function getData() {}
+
+    async function sortData() {
+        if (sort.type === "Value" && sort.direction === "Descending") {
+            const numDescending = [...rawData].sort(
+                (a, b) => b.potSize - a.potSize
+            )
+            setSortedData(numDescending)
+        } else if (sort.type === "Value" && sort.direction === "Ascending") {
+            const numAscending = [...rawData].sort(
+                (a, b) => a.potSize - b.potSize
+            )
+            setSortedData(numAscending)
+        } else if (sort.type === "Buy-in" && sort.direction === "Descending") {
+            const numDescending = [...rawData].sort((a, b) => b.buyIn - a.buyIn)
+            setSortedData(numDescending)
+        } else if (sort.type === "Buy-in" && sort.direction === "Ascending") {
+            const numAscending = [...rawData].sort((a, b) => a.buyIn - b.buyIn)
+            setSortedData(numAscending)
+        } else if (sort.type === "Time" && sort.direction === "Descending") {
+            const strDescending = [...rawData].sort((a, b) =>
+                a.timeLeft > b.timeLeft ? -1 : 1
+            )
+            setSortedData(strDescending)
+        } else if (sort.type === "Time" && sort.direction === "Ascending") {
+            const strAscending = [...rawData].sort((a, b) =>
+                a.timeLeft > b.timeLeft ? 1 : -1
+            )
+            setSortedData(strAscending)
+        } else if (
+            sort.type === "Contributions" &&
+            sort.direction === "Descending"
+        ) {
+            const numDescending = [...rawData].sort(
+                (a, b) => b.contributions - a.contributions
+            )
+            setSortedData(numDescending)
+        } else if (
+            sort.type === "Contributions" &&
+            sort.direction === "Ascending"
+        ) {
+            const numAscending = [...rawData].sort(
+                (a, b) => a.contributions - b.contributions
+            )
+            setSortedData(numAscending)
+        }
     }
 
     const potOptions = [
@@ -65,6 +120,8 @@ function Pots() {
             setPotSelection(potSelection - 1)
         }
     }
+
+    const pots = sortedData.map((item) => <Pot data={item} />)
 
     return (
         <div
@@ -204,30 +261,7 @@ function Pots() {
                     </div>
                 </div>
             </div>
-            <div className="Pots__container">
-                <Pot data={data} />
-                <Pot data={data} />
-                <Pot data={data} />
-                <Pot data={data} />
-                <Pot data={data} />
-                <Pot data={data} />
-                <Pot data={data} />
-                <Pot data={data} />
-                <Pot data={data} />
-                <Pot data={data} />
-                <Pot data={data} />
-                <Pot data={data} />
-                <Pot data={data} />
-                <Pot data={data} />
-                <Pot data={data} />
-                <Pot data={data} />
-                <Pot data={data} />
-                <Pot data={data} />
-                <Pot data={data} />
-                <Pot data={data} />
-                <Pot data={data} />
-                <Pot data={data} />
-            </div>
+            <div className="Pots__container">{pots}</div>
         </div>
     )
 }

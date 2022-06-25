@@ -5,7 +5,7 @@ function Pot(props) {
     return (
         <div className="Pot">
             <div className="Pot__header">
-                <h3 className="Pot__header-text">{props.data.id}</h3>
+                <h3 className="Pot__header-text">{`#${props.data.id}`}</h3>
                 <h3 className="Pot__header-text">{props.data.timeLeft}</h3>
             </div>
             <div className="Pot__body">
@@ -55,7 +55,7 @@ function Pot(props) {
                             className="Pot__body-title"
                             style={{ fontSize: "50px" }}
                         >
-                            {props.data.potSize}
+                            {props.data.buyIn}
                         </h1>
                         <h3
                             className="Pot__body-text"
