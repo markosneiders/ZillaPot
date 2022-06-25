@@ -1,26 +1,53 @@
+import React from "react"
 import "./Pots.css"
 
-function Pots() {
-    const addr = window.zilPay.wallet.defaultAccount.bech32
+import Pot from "../../components/Pot/Pot"
+import ScrollAnimation from "react-animate-on-scroll"
 
-    function getBalance() {
-        window.zilPay.blockchain.getBalance(addr).then(function (resp) {
-            console.log(resp)
-        })
+function Pots() {
+    // const addr = window.zilPay.wallet.defaultAccount.bech32
+
+    // function getBalance() {
+    //     window.zilPay.blockchain.getBalance(addr).then(function (resp) {
+    //         console.log(resp)
+    //     })
+    // }
+    const data = {
+        id: "#3473346343",
+        timeLeft: "19h 15m 6s",
+        potSize: 5374,
+        contributions: 17,
     }
 
     return (
         <div
             className="Pots"
-            style={{ height: window.innerHeight, width: window.innerWidth }}
+            style={{ height: window.innerHeight * 2, width: window.innerWidth }}
         >
-            <button
-                onClick={() => {
-                    getBalance()
-                }}
-            >
-                Get your acc balance!
-            </button>
+            <div className="Pots__container">
+                <Pot data={data} />
+                <Pot data={data} />
+                <Pot data={data} />
+                <Pot data={data} />
+                <Pot data={data} />
+                <Pot data={data} />
+                <Pot data={data} />
+                <Pot data={data} />
+                <Pot data={data} />
+                <Pot data={data} />
+                <Pot data={data} />
+                <Pot data={data} />
+                <Pot data={data} />
+                <Pot data={data} />
+                <Pot data={data} />
+                <Pot data={data} />
+                <Pot data={data} />
+                <Pot data={data} />
+                <Pot data={data} />
+                <Pot data={data} />
+                <Pot data={data} />
+                <Pot data={data} />
+            </div>
         </div>
     )
 }
