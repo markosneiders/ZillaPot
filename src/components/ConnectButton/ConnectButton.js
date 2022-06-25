@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import "./ConnectButton.css"
 import ZilPay from "../../assets/images/ZilPay.png"
 
