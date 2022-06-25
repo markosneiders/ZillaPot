@@ -23,7 +23,6 @@
 .ConnectButton:hover {
     background-position: right center; /* change the direction of the change here */
     color: white;
-    text-decoration: none;
     transform: scale(1.1);
 }
 .ConnectButton:active {

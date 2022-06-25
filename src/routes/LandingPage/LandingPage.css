@@ -1,3 +1,6 @@
+::-webkit-scrollbar {
+    display: none;
+}
 .LandingPage {
     background-color: hsla(195, 65%, 4%, 1);
     background-image: radial-gradient(
@@ -13,11 +16,18 @@
         radial-gradient(at 41% 87%, hsla(185, 49%, 29%, 1) 0px, transparent 50%);
 
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
+    overflow: hidden;
 }
-.LandingPage__title {
+.LandingPage__main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.LandingPage__main-title {
     background-image: linear-gradient(
         180deg,
         rgba(0, 0, 0, 0.4),
@@ -29,7 +39,7 @@
     font-size: 140px;
     text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 }
-.LandingPage__text {
+.LandingPage__main-text {
     background-image: linear-gradient(
         180deg,
         rgba(0, 0, 0, 0.4),
@@ -41,4 +51,90 @@
     font-size: 50px;
     margin-bottom: 32px;
     text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+.LandingPage__learnMore {
+    position: absolute;
+    bottom: 16px;
+    color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.LandingPage__learnMore-text {
+    font-size: larger;
+    background-image: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.7),
+        rgba(255, 255, 255, 0.5)
+    );
+    background-clip: text;
+    color: transparent;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.LandingPage__main__cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+.LandingPage__main__cards-cardBase {
+    display: flex;
+    padding: 16px;
+    flex-direction: column;
+    width: 323.6px;
+    height: 200px;
+    margin: 0px 80px;
+    border-radius: 32px;
+    box-shadow: 0 0 20px #000;
+}
+.LandingPage__main__cards-card1 {
+    background-color: hsla(188, 51%, 17%, 1);
+    background-image: radial-gradient(
+            at 100% 1%,
+            hsla(184, 48%, 28%, 1) 0px,
+            transparent 50%
+        ),
+        radial-gradient(at 0% 100%, hsla(179, 60%, 45%, 1) 0px, transparent 50%);
+}
+.LandingPage__main__cards-card2 {
+    background-color: hsla(188, 51%, 17%, 1);
+    background-image: radial-gradient(
+            at 4% 91%,
+            hsla(184, 48%, 28%, 1) 0px,
+            transparent 50%
+        ),
+        radial-gradient(at 99% 2%, hsla(179, 60%, 45%, 1) 0px, transparent 50%);
+}
+.LandingPage__main__cards-card3 {
+    background-color: hsla(188, 51%, 17%, 1);
+    background-image: radial-gradient(
+            at 100% 1%,
+            hsla(184, 48%, 28%, 1) 0px,
+            transparent 50%
+        ),
+        radial-gradient(at 0% 0%, hsla(179, 60%, 45%, 1) 0px, transparent 50%);
+}
+.LandingPage__main__cards-card-title {
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.9),
+        rgba(255, 255, 255, 0.5)
+    );
+    background-clip: text;
+    color: transparent;
+    font-weight: 100;
+}
+.LandingPage__main__cards-card-text {
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.9),
+        rgba(255, 255, 255, 0.5)
+    );
+    background-clip: text;
+    color: transparent;
+    margin-top: 8px;
+    font-weight: 100;
+    font-size: large;
 }
