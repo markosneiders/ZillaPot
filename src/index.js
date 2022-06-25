@@ -11,7 +11,7 @@ root.render(
     <BrowserRouter>
         <Routes className="index">
             <Route path="/" element={<LandingPage />} />
-            <Route path="Pots" element={<Pots />} />
+            <Route path="pots" element={<Pots />} />
         </Routes>
     </BrowserRouter>
 )
