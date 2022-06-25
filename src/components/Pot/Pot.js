@@ -4,7 +4,13 @@ import "./Pot.css"
 function Pot(props) {
     return (
         <div className="Pot">
-            <div className="Pot__header">
+            <div
+                className={
+                    props.data.timeLeft <= "00:00:10:00"
+                        ? "Pot__header-expiring"
+                        : "Pot__header"
+                }
+            >
                 <h3 className="Pot__header-text">{`#${props.data.id}`}</h3>
                 <h3 className="Pot__header-text">{props.data.timeLeft}</h3>
             </div>

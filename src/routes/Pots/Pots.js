@@ -2,14 +2,19 @@ import React, { useState, useEffect } from "react"
 import "./Pots.css"
 
 import TempData from "./TempData.json"
+//Importing all 4 pot card types
 import Pot from "../../components/Pot/Pot"
+import EPot from "../../components/Pot/EPot"
+import WPot from "../../components/Pot/Wpot"
+import LPot from "../../components/Pot/Lpot"
+
 import ScrollAnimation from "react-animate-on-scroll"
 import Select from "react-select"
+
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight"
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft"
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
-import { ListItem } from "@mui/material"
 
 function Pots() {
     const [potSelection, setPotSelection] = useState(0)
@@ -121,7 +126,17 @@ function Pots() {
         }
     }
 
-    const pots = sortedData.map((item) => <Pot data={item} />)
+    const pots = sortedData.map((item) =>
+        item.status === 0 ? (
+            <Pot data={item} />
+        ) : item.status === 1 ? (
+            <EPot data={item} />
+        ) : item.status === 2 ? (
+            <WPot data={item} />
+        ) : item.status === 3 ? (
+            <LPot data={item} />
+        ) : null
+    )
 
     return (
         <div

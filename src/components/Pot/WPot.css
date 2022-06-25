@@ -1,9 +1,9 @@
-.Pot {
+.WPot {
     background-image: linear-gradient(
         to right,
-        #153c42 0%,
-        #266970 51%,
-        #153c42 100%
+        #9a9b54 0%,
+        #d6d86b 51%,
+        #9a9b54 100%
     );
     background-size: 200%;
     transition: 0.5s;
@@ -21,21 +21,21 @@
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
 }
-.Pot:hover {
+.WPot:hover {
     background-position: right center; /* change the direction of the change here */
     transform: scale(1.1);
     box-shadow: 0 0 40px #000;
 }
-.Pot:active {
+.WPot:active {
     transform: scale(0.8);
     box-shadow: 0 0 10px #000;
 }
-.Pot__header {
+.WPot__header {
     background-image: linear-gradient(
         to right,
-        #0d262b 0%,
-        #1e5359 51%,
-        #0d262b 100%
+        #93944d 0%,
+        #c4c566 51%,
+        #93944d 100%
     );
     background-size: 200%;
     transition: 0.4s;
@@ -51,45 +51,20 @@
     box-sizing: border-box; /* Opera/IE 8+ */
     box-shadow: 0 0 5px #000;
 }
-.Pot__header-expiring {
-    background-image: linear-gradient(
-        to right,
-        #0d262b 0%,
-        #1e5359 51%,
-        #a32020 100%
-    );
-    background-size: 200%;
-    transition: 0.4s;
-    width: 100%;
-    padding: 8px 16px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box; /* Firefox, other Gecko */
-    box-sizing: border-box; /* Opera/IE 8+ */
-    box-shadow: 0 0 5px #000;
-}
-.Pot:hover .Pot__header {
-    background-position: right center; /* change the direction of the change here */
-    box-shadow: 0 0 20px #000;
-}
-.Pot:hover .Pot__header-expiring {
+.WPot:hover .WPot__header {
     background-position: right center; /* change the direction of the change here */
     box-shadow: 0 0 20px #000;
 }
 
-.Pot__header-text {
-    color: rgba(27, 181, 148, 0.5);
+.WPot__header-text {
+    color: rgba(21, 60, 66, 0.5);
     transition: 0.5s;
 }
-.Pot:hover .Pot__header-text {
-    color: rgba(27, 181, 148, 1);
+.WPot:hover .WPot__header-text {
+    color: rgba(21, 60, 66, 1);
 }
 
-.Pot__body {
+.WPot__body {
     padding: 8px 8px;
     height: 100%;
     width: 100%;
@@ -103,19 +78,19 @@
     justify-content: space-between;
     align-items: center;
 }
-.Pot__body-title {
-    color: rgba(27, 181, 148, 0.7);
+.WPot__body-title {
+    color: rgba(21, 60, 66, 0.7);
     font-weight: bold;
     transition: 0.5s;
 }
-.Pot:hover .Pot__body-title {
-    color: rgba(27, 181, 148, 1);
+.WPot:hover .WPot__body-title {
+    color: rgba(21, 60, 66, 1);
 }
-.Pot__body-text {
-    color: rgba(27, 181, 148, 0.3);
+.WPot__body-text {
+    color: rgba(21, 60, 66, 0.3);
     margin-left: 8px;
     transition: 0.5s;
 }
-.Pot:hover .Pot__body-text {
-    color: rgba(27, 181, 148, 0.8);
+.WPot:hover .WPot__body-text {
+    color: rgba(21, 60, 66, 0.8);
 }
