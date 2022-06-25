@@ -21,6 +21,7 @@ function Pots() {
     const [sort, setSort] = useState({ type: "Value", direction: "Descending" })
     const [rawData, setRawData] = useState(TempData)
     const [sortedData, setSortedData] = useState([{}])
+
     // const addr = window.zilPay.wallet.defaultAccount.bech32
 
     // function getBalance() {
@@ -84,15 +85,33 @@ function Pots() {
             )
             setSortedData(numAscending)
         }
+        console.log(sortedData)
     }
-
     const potOptions = [
-        "Active Pots",
-        "All Pots",
-        "Joined Pots",
-        "Won Pots",
-        "Lost Pots",
-        "Expired Pots",
+        {
+            label: "Active Pots",
+            value: [0],
+        },
+        {
+            label: "All Pots",
+            value: [0, 1, 2, 3],
+        },
+        {
+            label: "Joined Pots",
+            value: [0, 0, 0, 0],
+        },
+        {
+            label: "Won Pots",
+            value: [2],
+        },
+        {
+            label: "Lost Pots",
+            value: [3],
+        },
+        {
+            label: "Expired Pots",
+            value: [1],
+        },
     ]
 
     function handleSort(type) {
@@ -118,7 +137,7 @@ function Pots() {
             setPotSelection(potSelection + 1)
         }
     }
-    function handlePotCyclebackward() {
+    function handlePotCycleBackward() {
         if (potSelection === 0) {
             setPotSelection(5)
         } else {
@@ -126,17 +145,25 @@ function Pots() {
         }
     }
 
-    const pots = sortedData.map((item) =>
-        item.status === 0 ? (
-            <Pot data={item} />
-        ) : item.status === 1 ? (
-            <EPot data={item} />
-        ) : item.status === 2 ? (
-            <WPot data={item} />
-        ) : item.status === 3 ? (
-            <LPot data={item} />
-        ) : null
-    )
+    const pots = sortedData
+        .filter(
+            (data) =>
+                data.status === potOptions[potSelection].value[0] ||
+                potOptions[potSelection].value[1] ||
+                potOptions[potSelection].value[2] ||
+                potOptions[potSelection].value[3]
+        )
+        .map((item) =>
+            item.status === 0 ? (
+                <Pot data={item} />
+            ) : item.status === 1 ? (
+                <EPot data={item} />
+            ) : item.status === 2 ? (
+                <WPot data={item} />
+            ) : item.status === 3 ? (
+                <LPot data={item} />
+            ) : null
+        )
 
     return (
         <div
@@ -157,17 +184,17 @@ function Pots() {
                 >
                     <KeyboardArrowLeftIcon
                         sx={{ color: "white", padding: 2, cursor: "pointer" }}
-                        onClick={() => handlePotCycleForward()}
+                        onClick={() => handlePotCycleBackward()}
                     />
                     <h1
                         className="Pots__header-bigTitle"
                         onClick={() => handlePotCycleForward()}
                     >
-                        {potOptions[potSelection]}
+                        {potOptions[potSelection].label}
                     </h1>
                     <KeyboardArrowRightIcon
                         sx={{ color: "white", padding: 2, cursor: "pointer" }}
-                        onClick={() => handlePotCyclebackward()}
+                        onClick={() => handlePotCycleForward()}
                     />
                 </div>
 
