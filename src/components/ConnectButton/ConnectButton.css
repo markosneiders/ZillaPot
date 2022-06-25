@@ -34,8 +34,8 @@
 .ConnectButton__text {
     background-image: linear-gradient(
         180deg,
-        rgba(255, 255, 255, 0.9),
-        rgba(255, 255, 255, 0.5)
+        rgba(256, 256, 256, 0.9),
+        rgba(256, 256, 256, 0.5)
     );
     background-clip: text;
     color: transparent;

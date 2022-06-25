@@ -26,7 +26,10 @@
     transform: scale(1.1);
     box-shadow: 0 0 40px #000;
 }
-
+.Pot:active {
+    transform: scale(0.8);
+    box-shadow: 0 0 10px #000;
+}
 .Pot__header {
     background-image: linear-gradient(
         to right,
@@ -76,11 +79,15 @@
     align-items: center;
 }
 .Pot__body-title {
-    color: rgba(27, 181, 148, 1);
+    color: rgba(27, 181, 148, 0.7);
     font-weight: bold;
+    transition: 0.5s;
+}
+.Pot:hover .Pot__body-title {
+    color: rgba(27, 181, 148, 1);
 }
 .Pot__body-text {
-    color: rgba(27, 181, 148, 0.4);
+    color: rgba(27, 181, 148, 0.3);
     margin-left: 8px;
     transition: 0.5s;
 }

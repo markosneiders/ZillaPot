@@ -20,6 +20,7 @@
     align-items: center;
     flex-direction: column;
     overflow: hidden;
+    user-select: none;
 }
 .LandingPage__main {
     display: flex;
