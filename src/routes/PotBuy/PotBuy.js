@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined"
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft"
+import { Modal } from "@mui/material"
 
 function PotBuy() {
     const location = useLocation()
@@ -16,6 +17,7 @@ function PotBuy() {
 
     const [historyData, setHistoryData] = useState(TempData)
     const [deposit, setDeposit] = useState()
+    const [infoModal, setInfoModal] = useState(false)
 
     const formatAddress = (address) => {
         return `${address.slice(0, 6)}...${address.slice(-4)}`
@@ -34,6 +36,13 @@ function PotBuy() {
             </h1>
         </div>
     ))
+
+    function openInfo() {
+        setInfoModal(true)
+    }
+    function closeInfo() {
+        setInfoModal(false)
+    }
     return (
         <div
             className="PotBuy"
@@ -53,8 +62,13 @@ function PotBuy() {
                     </h1>
                 </div>
                 <div className="PotBuy__container-body">
-                    <div style={{ position: "absolute", right: 16, top: 16 }}>
+                    <Modal open={infoModal} onClose={() => closeInfo()}>
+                        <div className="PotBuy__info">MODAAAAL</div>
+                    </Modal>
+                    <div style={{ position: "absolute", right: 16, top: 24 }}>
                         <InfoOutlinedIcon
+                            onClick={() => openInfo()}
+                            onClose={() => window.alert("close")}
                             fontSize="large"
                             sx={{
                                 color: "rgb(33, 238, 235, 0.5)",
@@ -69,7 +83,7 @@ function PotBuy() {
                             }}
                         />
                     </div>
-                    <div style={{ position: "absolute", left: 16, top: 16 }}>
+                    <div style={{ position: "absolute", left: 16, top: 24 }}>
                         <KeyboardArrowLeftIcon
                             onClick={() => navigation(-1)}
                             fontSize="large"
@@ -136,13 +150,14 @@ function PotBuy() {
                 style={{
                     display: "flex",
                     flexDirection: "column",
+                    alignItems: "center",
                     height: "80%",
                     width: "40%",
                 }}
             >
                 <div
                     className="PotBuy__container"
-                    style={{ width: " 100%", height: "70%", marginBottom: 32 }}
+                    style={{ width: " 100%", height: "70%" }}
                 >
                     <div className="PotBuy__container-header">
                         <h1 className="PotBuy__container-header-title">
@@ -154,7 +169,7 @@ function PotBuy() {
                     </div>
                     <div
                         className="PotBuy__container-body"
-                        style={{ paddingTop: 16, justifyContent: "flex-start" }}
+                        style={{ justifyContent: "flex-start" }}
                     >
                         <div
                             style={{
@@ -180,7 +195,7 @@ function PotBuy() {
                 </div>
                 <div
                     className="PotBuy__container"
-                    style={{ width: " 100%", height: "30%" }}
+                    style={{ width: " 100%", height: "25%", marginTop: 32 }}
                 >
                     <div className="PotBuy__container-header">
                         <h1 className="PotBuy__container-header-title">
