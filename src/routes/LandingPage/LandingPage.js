@@ -5,6 +5,7 @@ import "./LandingPage.css"
 //Component imports
 import Button from "../../components/Button/Button"
 import NavBar from "../../components/NavBar/NavBar"
+import InfoCard from "../../components/InfoCard/InfoCard"
 
 //Package imports
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown"
@@ -77,49 +78,44 @@ function LandingPage() {
                 className="LandingPage__main"
                 style={{ height: window.innerHeight, width: window.innerWidth }}
             >
-                <ScrollAnimation animateIn="fadeIn">
-                    <div className="LandingPage__main__cards">
-                        <div className="LandingPage__main__cards-cardBase LandingPage__main__cards-card1">
-                            <h1 className="LandingPage__main__cards-card-title">
-                                First of it's kind
-                            </h1>
-                            <h1 className="LandingPage__main__cards-card-text">
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut
-                                enim ad minim veniam, quis nostrud exercitation
-                                ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat.
-                            </h1>
+                <div className="LandingPage__main__cards">
+                    <ScrollAnimation animateIn="fadeIn">
+                        <div style={{ marginBottom: 400 }}>
+                            <InfoCard
+                                variant={1}
+                                title="First of it's kind"
+                                text="ZillaPot is the first casino game of it's
+                            kind on the Zilliqa blockchain. Sporting sleek astethics and 
+                            engaging gameplay ZillaPot will have you coming back
+                            for more. We are proud to be the trailblazers of the casino world
+                            in this new frontier."
+                            />
                         </div>
-                        <div className="LandingPage__main__cards-cardBase LandingPage__main__cards-card2">
-                            <h1 className="LandingPage__main__cards-card-title">
-                                First of it's kind
-                            </h1>
-                            <h1 className="LandingPage__main__cards-card-text">
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut
-                                enim ad minim veniam, quis nostrud exercitation
-                                ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat.
-                            </h1>
+                    </ScrollAnimation>
+
+                    <ScrollAnimation animateIn="fadeIn">
+                        <InfoCard
+                            variant={2}
+                            title="How to play ZillaPot"
+                            text="The main goal of ZillaPot is to be the last 
+                            person to deposit money into the pot before the time runs out.
+                            The last person to deposit will win the whole content of the pot.
+                            Every time someone deposits, the minimum deposit goes up and the 
+                            time increases."
+                        />
+                    </ScrollAnimation>
+                    <ScrollAnimation animateIn="fadeIn">
+                        <div style={{ marginBottom: 400 }}>
+                            <InfoCard
+                                variant={3}
+                                title="How to get started"
+                                text="It's simple! Scroll up and connect with your ZillPay wallet. 
+                            After that head over to the pots section and find one which suits you best, 
+                            or create your own. If you're ever unsure or get stuck reffer to the help page."
+                            />
                         </div>
-                        <div className="LandingPage__main__cards-cardBase LandingPage__main__cards-card3">
-                            <h1 className="LandingPage__main__cards-card-title">
-                                First of it's kind
-                            </h1>
-                            <h1 className="LandingPage__main__cards-card-text">
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut
-                                enim ad minim veniam, quis nostrud exercitation
-                                ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat.
-                            </h1>
-                        </div>
-                    </div>
-                </ScrollAnimation>
+                    </ScrollAnimation>
+                </div>
             </div>
         </div>
     )

@@ -1,0 +1,75 @@
+.InfoCardBase {
+    display: flex;
+    padding: 16px;
+    flex-direction: column;
+    width: 323.6px;
+    height: 210px;
+    margin: 32px 80px;
+    border-radius: 32px;
+    box-shadow: 0 0 20px #000;
+    transition: 0.5s;
+}
+.InfoCardBase:hover {
+    background-color: rgb(34, 99, 107);
+    transform: scale(1.05);
+}
+.InfoCard1 {
+    background-color: hsla(188, 51%, 17%, 1);
+    background-image: radial-gradient(
+            at 100% 1%,
+            hsla(184, 48%, 28%, 1) 0px,
+            transparent 50%
+        ),
+        radial-gradient(at 0% 100%, hsla(179, 60%, 45%, 1) 0px, transparent 50%);
+}
+.InfoCard2 {
+    background-color: hsla(188, 51%, 17%, 1);
+    background-image: radial-gradient(
+            at 4% 91%,
+            hsla(184, 48%, 28%, 1) 0px,
+            transparent 50%
+        ),
+        radial-gradient(at 99% 2%, hsla(179, 60%, 45%, 1) 0px, transparent 50%);
+}
+.InfoCard3 {
+    background-color: hsla(188, 51%, 17%, 1);
+    background-image: radial-gradient(
+            at 100% 1%,
+            hsla(184, 48%, 28%, 1) 0px,
+            transparent 50%
+        ),
+        radial-gradient(at 0% 0%, hsla(179, 60%, 45%, 1) 0px, transparent 50%);
+}
+.InfoCard4 {
+    background-color: hsla(188, 51%, 17%, 1);
+    background-image: radial-gradient(
+            at 4% 91%,
+            hsla(184, 48%, 28%, 1) 0px,
+            transparent 50%
+        ),
+        radial-gradient(at 99% 99%, hsla(179, 60%, 45%, 1) 0px, transparent 50%);
+}
+.InfoCard__title {
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.9),
+        rgba(255, 255, 255, 0.5)
+    );
+    background-clip: text;
+    color: transparent;
+    font-weight: 100;
+}
+.InfoCard__text {
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.9),
+        rgba(255, 255, 255, 0.5)
+    );
+    background-clip: text;
+    color: transparent;
+    margin-top: 8px;
+    font-weight: 100;
+    font-size: large;
+}

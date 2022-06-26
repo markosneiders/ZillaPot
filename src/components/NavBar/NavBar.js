@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom"
 function NavBar() {
     const location = useLocation()
     const navigation = useNavigate()
+    //const addr = window.zilPay.wallet.defaultAccount.bech32
     return (
         <div className="NavBar">
             <div className="Navbar__logo">ZillaPot</div>
@@ -39,11 +40,11 @@ function NavBar() {
                             : "Navbar__links-text"
                     }
                 >
-                    Help
+                    Help/About
                 </h1>
                 <Button
                     onClick={() => navigation("/profile")}
-                    text={"Account address"}
+                    //  text={`${addr.slice(0, 6)}...${addr.slice(-6)}`}
                 />
             </div>
         </div>
