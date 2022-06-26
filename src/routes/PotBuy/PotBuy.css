@@ -23,10 +23,7 @@
     box-sizing: border-box;
     overflow: hidden;
 }
-.PotBuy__info {
-    width: 100px;
-    height: 100px;
-}
+
 .PotBuy__container {
     background-image: linear-gradient(
         to right,

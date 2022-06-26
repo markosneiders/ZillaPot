@@ -4,6 +4,7 @@ import TempData from "./TempData.json"
 
 //Component imports
 import Button from "../../components/Button/Button"
+import InfoModal from "../../components/InfoModal/InfoModal"
 
 import { useLocation } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
@@ -51,6 +52,12 @@ function PotBuy() {
                 width: window.innerWidth,
             }}
         >
+            <Modal open={infoModal} onClose={() => closeInfo()}>
+                <InfoModal
+                    headerLeftText={"Info"}
+                    headerRightText={"#337474458"}
+                />
+            </Modal>
             <div
                 className="PotBuy__container"
                 style={{ width: "40%", height: "80%", marginRight: 64 }}
@@ -62,9 +69,6 @@ function PotBuy() {
                     </h1>
                 </div>
                 <div className="PotBuy__container-body">
-                    <Modal open={infoModal} onClose={() => closeInfo()}>
-                        <div className="PotBuy__info">MODAAAAL</div>
-                    </Modal>
                     <div style={{ position: "absolute", right: 16, top: 24 }}>
                         <InfoOutlinedIcon
                             onClick={() => openInfo()}
