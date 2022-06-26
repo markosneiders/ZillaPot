@@ -3,7 +3,10 @@ import "./EPot.css"
 
 function EPot(props) {
     return (
-        <div className="EPot">
+        <div
+            className="EPot"
+            onClick={() => props.click(props.data.id, props.data.status)}
+        >
             <div className="EPot__header">
                 <h3 className="EPot__header-text">{`#${props.data.id}`}</h3>
                 <h3 className="EPot__header-text">Expired</h3>

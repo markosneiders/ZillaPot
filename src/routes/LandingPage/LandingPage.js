@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react"
 import "./LandingPage.css"
 
 //Component imports
-import ConnectButton from "../../components/ConnectButton/ConnectButton"
+import Button from "../../components/Button/Button"
 
 //Package imports
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown"
@@ -60,7 +60,9 @@ function LandingPage() {
                 <h1 className="LandingPage__main-text">
                     First sunk cost game on the Zilliqa chain
                 </h1>
-                <ConnectButton
+                <Button
+                    text={"Connect to ZilPay"}
+                    logo={true}
                     onClick={() => {
                         handleConnect()
                     }}

@@ -1,4 +1,4 @@
-.ConnectButton {
+.Button {
     background-image: linear-gradient(
         to right,
         #0d262b 0%,
@@ -20,22 +20,33 @@
     align-items: center;
     cursor: pointer;
 }
-.ConnectButton:hover {
+.Button:hover {
     background-position: right center; /* change the direction of the change here */
     color: white;
     transform: scale(1.1);
 }
-.ConnectButton:active {
+
+.Button:active {
     transform: scale(0.8);
 }
-.ConnectButton__image {
+.Button__image {
     margin-left: 16px;
 }
-.ConnectButton__text {
+.Button__text {
     background-image: linear-gradient(
         180deg,
         rgba(256, 256, 256, 0.9),
-        rgba(256, 256, 256, 0.5)
+        rgba(256, 256, 256, 0.6)
+    );
+    background-clip: text;
+    color: transparent;
+    transition: 0.5s;
+}
+.Button:hover .Button__text {
+    background-image: linear-gradient(
+        180deg,
+        rgba(256, 256, 256, 0.9),
+        rgba(256, 256, 256, 0.9)
     );
     background-clip: text;
     color: transparent;

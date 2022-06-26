@@ -4,12 +4,14 @@ import "./Pots.css"
 import TempData from "./TempData.json"
 //Importing all 4 pot card types
 import Pot from "../../components/Pot/Pot"
+import APot from "../../components/Pot/APot"
 import EPot from "../../components/Pot/EPot"
 import WPot from "../../components/Pot/Wpot"
 import LPot from "../../components/Pot/Lpot"
 
 import ScrollAnimation from "react-animate-on-scroll"
 import Select from "react-select"
+import { useNavigate } from "react-router-dom"
 
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight"
@@ -29,6 +31,8 @@ function Pots() {
     //         console.log(resp)
     //     })
     // }
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         getData()
@@ -155,15 +159,19 @@ function Pots() {
         )
         .map((item) =>
             item.status === 0 ? (
-                <Pot data={item} />
+                <APot data={item} click={handlePotClick} />
             ) : item.status === 1 ? (
-                <EPot data={item} />
+                <EPot data={item} click={handlePotClick} />
             ) : item.status === 2 ? (
-                <WPot data={item} />
+                <WPot data={item} click={handlePotClick} />
             ) : item.status === 3 ? (
-                <LPot data={item} />
+                <LPot data={item} click={handlePotClick} />
             ) : null
         )
+
+    function handlePotClick(id, status) {
+        navigate("buy", { state: { id: id, status: status } })
+    }
 
     return (
         <div

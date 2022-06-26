@@ -1,31 +1,31 @@
 import React from "react"
-import "./Pot.css"
+import "./APot.css"
 
-function Pot(props) {
+function APot(props) {
     return (
         <div
-            className="Pot"
+            className="APot"
             onClick={() => props.click(props.data.id, props.data.status)}
         >
             <div
                 className={
                     props.data.timeLeft <= "00:00:10:00"
-                        ? "Pot__header-expiring"
-                        : "Pot__header"
+                        ? "APot__header-expiring"
+                        : "APot__header"
                 }
             >
-                <h3 className="Pot__header-text">{`#${props.data.id}`}</h3>
+                <h3 className="APot__header-text-lead">{`#${props.data.id}`}</h3>
                 <h3
                     className={
                         props.data.timeLeft <= "00:00:10:00"
-                            ? "Pot__header-text-expiring"
-                            : "Pot__header-text"
+                            ? "APot__header-text-expiring"
+                            : "APot__header-text"
                     }
                 >
                     {props.data.timeLeft}
                 </h3>
             </div>
-            <div className="Pot__body">
+            <div className="APot__body">
                 <div style={{ display: "flex" }}>
                     <div
                         style={{
@@ -36,19 +36,19 @@ function Pot(props) {
                         }}
                     >
                         <h3
-                            className="Pot__body-text"
+                            className="APot__body-text"
                             style={{ fontWeight: 100 }}
                         >
                             Pot size
                         </h3>
                         <h1
-                            className="Pot__body-title"
+                            className="APot__body-title"
                             style={{ fontSize: "50px" }}
                         >
                             {props.data.potSize}
                         </h1>
                         <h3
-                            className="Pot__body-text"
+                            className="APot__body-text"
                             style={{ fontWeight: 100 }}
                         >
                             ZIL
@@ -63,30 +63,30 @@ function Pot(props) {
                         }}
                     >
                         <h3
-                            className="Pot__body-text"
+                            className="APot__body-text"
                             style={{ fontWeight: 100 }}
                         >
                             Min. buy-in amount
                         </h3>
                         <h1
-                            className="Pot__body-title"
+                            className="APot__body-title"
                             style={{ fontSize: "50px" }}
                         >
                             {props.data.buyIn}
                         </h1>
                         <h3
-                            className="Pot__body-text"
+                            className="APot__body-text"
                             style={{ fontWeight: 100 }}
                         >
                             ZIL
                         </h3>
                     </div>
                 </div>
-                <h3 className="Pot__body-text" style={{ fontWeight: 100 }}>
+                <h3 className="APot__body-text" style={{ fontWeight: 100 }}>
                     {`${props.data.contributions} contributions`}
                 </h3>
             </div>
         </div>
     )
 }
-export default Pot
+export default APot

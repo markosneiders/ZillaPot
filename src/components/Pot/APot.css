@@ -1,4 +1,4 @@
-.Pot {
+.APot {
     background-image: linear-gradient(
         to right,
         #153c42 0%,
@@ -21,16 +21,16 @@
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
 }
-.Pot:hover {
+.APot:hover {
     background-position: right center; /* change the direction of the change here */
     transform: scale(1.1);
     box-shadow: 0 0 40px #000;
 }
-.Pot:active {
+.APot:active {
     transform: scale(0.8);
     box-shadow: 0 0 10px #000;
 }
-.Pot__header {
+.APot__header {
     background-image: linear-gradient(
         to right,
         #0d262b 0%,
@@ -51,7 +51,7 @@
     box-sizing: border-box; /* Opera/IE 8+ */
     box-shadow: 0 0 5px #000;
 }
-.Pot__header-expiring {
+.APot__header-expiring {
     background-image: linear-gradient(
         to right,
         #0d262b 0%,
@@ -72,31 +72,45 @@
     box-sizing: border-box; /* Opera/IE 8+ */
     box-shadow: 0 0 5px #000;
 }
-.Pot:hover .Pot__header {
+.APot:hover .APot__header {
     background-position: right center; /* change the direction of the change here */
     box-shadow: 0 0 20px #000;
 }
-.Pot:hover .Pot__header-expiring {
+.APot:hover .APot__header-expiring {
     background-position: right center; /* change the direction of the change here */
     box-shadow: 0 0 20px #000;
 }
 
-.Pot__header-text {
+.APot__header-text {
     color: rgba(27, 181, 148, 0.5);
     transition: 0.5s;
 }
-.Pot__header-text-expiring {
+.APot:hover .APot__header-text {
+    color: rgba(27, 181, 148, 1);
+}
+.APot__header-text-expiring {
     color: rgba(27, 181, 148, 0.5);
     transition: 0.5s;
 }
-.Pot:hover .APot__header-text-expiring {
+.APot:hover .APot__header-text-expiring {
     color: rgba(181, 27, 27, 1);
 }
-.Pot:hover .Pot__header-text-expiring {
+.APot__header-text-lead {
+    color: rgba(55, 235, 0, 0.5);
+    transition: 0.5s;
+}
+.APot:hover .APot__header-text-lead {
+    color: rgba(27, 181, 148, 1);
+}
+.APot__header-text-notLead {
+    color: rgba(255, 187, 0, 0.5);
+    transition: 0.5s;
+}
+.APot:hover .APot__header-text-notLead {
     color: rgba(27, 181, 148, 1);
 }
 
-.Pot__body {
+.APot__body {
     padding: 8px 8px;
     height: 100%;
     width: 100%;
@@ -110,19 +124,19 @@
     justify-content: space-between;
     align-items: center;
 }
-.Pot__body-title {
+.APot__body-title {
     color: rgba(27, 181, 148, 0.7);
     font-weight: bold;
     transition: 0.5s;
 }
-.Pot:hover .Pot__body-title {
+.APot:hover .APot__body-title {
     color: rgba(27, 181, 148, 1);
 }
-.Pot__body-text {
+.APot__body-text {
     color: rgba(27, 181, 148, 0.3);
     margin-left: 8px;
     transition: 0.5s;
 }
-.Pot:hover .Pot__body-text {
+.APot:hover .APot__body-text {
     color: rgba(27, 181, 148, 0.8);
 }
