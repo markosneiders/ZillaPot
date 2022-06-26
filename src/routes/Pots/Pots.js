@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react"
 import "./Pots.css"
 
 import TempData from "./TempData.json"
-//Importing all 4 pot card types
+
+//Importing all 5 pot card types and navbar
 import Pot from "../../components/Pot/Pot"
 import APot from "../../components/Pot/APot"
 import EPot from "../../components/Pot/EPot"
 import WPot from "../../components/Pot/Wpot"
 import LPot from "../../components/Pot/Lpot"
+import NavBar from "../../components/NavBar/NavBar"
 
 import ScrollAnimation from "react-animate-on-scroll"
 import Select from "react-select"
@@ -159,7 +161,7 @@ function Pots() {
         )
         .map((item) =>
             item.status === 0 ? (
-                <APot data={item} click={handlePotClick} />
+                <Pot data={item} click={handlePotClick} />
             ) : item.status === 1 ? (
                 <EPot data={item} click={handlePotClick} />
             ) : item.status === 2 ? (
@@ -182,6 +184,7 @@ function Pots() {
                 minHeight: window.innerHeight,
             }}
         >
+            <NavBar />
             <div className="Pots__header">
                 <div
                     style={{

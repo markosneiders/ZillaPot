@@ -5,6 +5,7 @@ import TempData from "./TempData.json"
 //Component imports
 import Button from "../../components/Button/Button"
 import InfoModal from "../../components/InfoModal/InfoModal"
+import NavBar from "../../components/NavBar/NavBar"
 
 import { useLocation } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
@@ -52,6 +53,9 @@ function PotBuy() {
                 width: window.innerWidth,
             }}
         >
+            <div style={{ position: "absolute", top: 0, width: "100%" }}>
+                <NavBar />
+            </div>
             <Modal open={infoModal} onClose={() => closeInfo()}>
                 <InfoModal
                     headerLeftText={"Info"}

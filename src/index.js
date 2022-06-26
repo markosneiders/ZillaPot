@@ -7,6 +7,8 @@ import LandingPage from "./routes/LandingPage/LandingPage"
 import Pots from "./routes/Pots/Pots"
 import PotBuy from "./routes/PotBuy/PotBuy"
 
+import NavBar from "./components/NavBar/NavBar"
+
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
     <BrowserRouter>

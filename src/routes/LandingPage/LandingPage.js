@@ -4,6 +4,7 @@ import "./LandingPage.css"
 
 //Component imports
 import Button from "../../components/Button/Button"
+import NavBar from "../../components/NavBar/NavBar"
 
 //Package imports
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown"

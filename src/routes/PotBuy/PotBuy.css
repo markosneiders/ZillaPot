@@ -19,6 +19,7 @@
     justify-content: center;
     user-select: none;
     padding: 64px;
+    padding-top: 128px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     overflow: hidden;

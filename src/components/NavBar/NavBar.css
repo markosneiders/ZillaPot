@@ -1,0 +1,36 @@
+.NavBar {
+    padding: 16px 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.Navbar__logo {
+    color: #fff;
+    font-size: 70px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.Navbar__links {
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    align-items: center;
+}
+.Navbar__links-text {
+    color: rgba(256, 256, 256, 0.5);
+    font-size: 30px;
+    font-weight: 100;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.Navbar__links-text-active {
+    color: rgba(256, 256, 256, 1);
+    font-size: 30px;
+    font-weight: 100;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.Navbar__links-text:hover {
+    color: rgba(256, 256, 256, 1);
+}
