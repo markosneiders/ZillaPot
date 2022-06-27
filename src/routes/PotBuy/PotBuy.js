@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import "./PotBuy.css"
 import TempData from "./TempData.json"
 
@@ -20,6 +20,7 @@ function PotBuy() {
     const [historyData, setHistoryData] = useState(TempData)
     const [deposit, setDeposit] = useState()
     const [infoModal, setInfoModal] = useState(false)
+    const [status, setStatus] = useState("")
 
     const formatAddress = (address) => {
         return `${address.slice(0, 6)}...${address.slice(-4)}`
@@ -41,10 +42,14 @@ function PotBuy() {
 
     function openInfo() {
         setInfoModal(true)
+        console.log(location.state.status)
     }
     function closeInfo() {
         setInfoModal(false)
     }
+    useEffect(() => {
+        setStatus("--expired")
+    }, [])
     return (
         <div
             className="PotBuy"
@@ -117,7 +122,6 @@ function PotBuy() {
                         </h1>
                         <h1 className="PotBuy__container-body-text">ZIL</h1>
                     </div>
-
                     <div
                         style={{
                             display: "flex",
@@ -126,32 +130,50 @@ function PotBuy() {
                             justifyContent: "space-around",
                         }}
                     >
-                        <div className="PotBuy__container-body-textContainer">
-                            <h1 className="PotBuy__container-body-text">
-                                Time left
-                            </h1>
-                            <h1 className="PotBuy__container-body-title">
-                                15:53:13
-                            </h1>
-                            <h1 className="PotBuy__container-body-text">
-                                hh:mm:ss
-                            </h1>
-                        </div>
-                        <div className="PotBuy__container-body-textContainer">
-                            <h1 className="PotBuy__container-body-text">
-                                Minimum deposit
-                            </h1>
-                            <h1 className="PotBuy__container-body-title">
-                                583.93
-                            </h1>
-                            <h1 className="PotBuy__container-body-text">ZIL</h1>
-                        </div>
+                        {location.state.status === 0 ? (
+                            <>
+                                <div className="PotBuy__container-body-textContainer">
+                                    <h1 className="PotBuy__container-body-text">
+                                        Time left
+                                    </h1>
+                                    <h1 className="PotBuy__container-body-title">
+                                        15:53:13
+                                    </h1>
+                                    <h1 className="PotBuy__container-body-text">
+                                        hh:mm:ss
+                                    </h1>
+                                </div>
+
+                                <div className="PotBuy__container-body-textContainer">
+                                    <h1 className="PotBuy__container-body-text">
+                                        Minimum deposit
+                                    </h1>
+                                    <h1 className="PotBuy__container-body-title">
+                                        583.93
+                                    </h1>
+                                    <h1 className="PotBuy__container-body-text">
+                                        ZIL
+                                    </h1>
+                                </div>
+                            </>
+                        ) : (
+                            <div className="PotBuy__container-body-textContainer">
+                                <h1 className="PotBuy__container-body-text">
+                                    Won by
+                                </h1>
+                                <h1 className="PotBuy__container-body-title">
+                                    zil1ng...lr4907
+                                </h1>
+                            </div>
+                        )}
                     </div>
-                    <Button
-                        text={"Deposit minimum"}
-                        logo={false}
-                        onClick={() => {}}
-                    />
+                    {location.state.status === 0 ? (
+                        <Button
+                            text={"Deposit minimum"}
+                            logo={false}
+                            onClick={() => {}}
+                        />
+                    ) : null}
                 </div>
             </div>
             <div
@@ -165,7 +187,7 @@ function PotBuy() {
             >
                 <div
                     className="PotBuy__container"
-                    style={{ width: " 100%", height: "70%" }}
+                    style={{ width: " 100%", height: "100%" }}
                 >
                     <div className="PotBuy__container-header">
                         <h1 className="PotBuy__container-header-title">
@@ -199,47 +221,6 @@ function PotBuy() {
                         <div className="PotBuy__container-body-historyList">
                             {history}
                         </div>
-                    </div>
-                </div>
-                <div
-                    className="PotBuy__container"
-                    style={{ width: " 100%", height: "25%", marginTop: 32 }}
-                >
-                    <div className="PotBuy__container-header">
-                        <h1 className="PotBuy__container-header-title">
-                            Deposit
-                        </h1>
-                        <div style={{ display: "flex" }}>
-                            <h1 className="PotBuy__container-header-title">
-                                583.93
-                            </h1>
-                            <h1 className="PotBuy__container-header-text">
-                                ZIL
-                            </h1>
-                        </div>
-                    </div>
-                    <div
-                        className="PotBuy__container-body"
-                        style={{ flexDirection: "row" }}
-                    >
-                        <form
-                            // onSubmit={handleSubmit}
-                            // onAbort={() => props.setAddress(address)}
-                            className="PotBuy__container-body-form"
-                        >
-                            <input
-                                className="PotBuy__container-body-input"
-                                type="number"
-                                placeholder="Enter deposit amount..."
-                                value={deposit}
-                                onChange={(e) => setDeposit(e.target.value)}
-                            />
-                        </form>
-                        <Button
-                            text={"Deposit"}
-                            logo={false}
-                            onClick={() => {}}
-                        />
                     </div>
                 </div>
             </div>

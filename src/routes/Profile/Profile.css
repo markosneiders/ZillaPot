@@ -22,6 +22,6 @@
     justify-content: center;
     flex-direction: column;
 }
-.Profile__container-cards {
+.Profile__cards {
     display: flex;
 }

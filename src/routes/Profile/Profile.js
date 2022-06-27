@@ -47,7 +47,7 @@ function Profile() {
                         6
                     )}...${userData.address.slice(-6)}`}
                     content={
-                        <div className="Profile__container-cards">
+                        <div className="Profile__cards">
                             <div className="Pot" style={{ cursor: "default" }}>
                                 <div className="Pot__header">
                                     <h3 className="Pot__header-text">{`#${regularData.id}`}</h3>
