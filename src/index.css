@@ -3,3 +3,15 @@
     margin: 0px;
     user-select: none;
 }
+.Warning {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    outline: none;
+}
+.Warning__text {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 24px;
+    color: rgba(27, 181, 148, 1);
+}

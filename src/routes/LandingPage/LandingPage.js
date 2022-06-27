@@ -39,6 +39,10 @@ function LandingPage() {
         const check1 = checkWallet()
         const check2 = await connectWallet()
         if (check1 && check2) {
+            localStorage.setItem(
+                "userAddress",
+                window.zilPay.wallet.defaultAccount.bech32
+            )
             navigate("/pots")
         } else {
             alert("Please connect to Zilla")

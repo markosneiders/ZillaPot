@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import "./NavBar.css"
 
 import Button from "../Button/Button"
@@ -7,7 +7,9 @@ import { useNavigate } from "react-router-dom"
 function NavBar() {
     const location = useLocation()
     const navigation = useNavigate()
-    //const addr = window.zilPay.wallet.defaultAccount.bech32
+    const [userAddress, setUserAddress] = useState(
+        localStorage.getItem("userAddress")
+    )
     return (
         <div className="NavBar">
             <div className="Navbar__logo">ZillaPot</div>
@@ -44,7 +46,9 @@ function NavBar() {
                 </h1>
                 <Button
                     onClick={() => navigation("/profile")}
-                    //  text={`${addr.slice(0, 6)}...${addr.slice(-6)}`}
+                    text={`${userAddress.slice(0, 6)}...${userAddress.slice(
+                        -6
+                    )}`}
                 />
             </div>
         </div>
