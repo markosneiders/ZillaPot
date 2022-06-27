@@ -20,6 +20,14 @@
     align-items: center;
     cursor: pointer;
 }
+.Button--golden {
+    background-image: linear-gradient(
+        to right,
+        #9a9b54 0%,
+        #d6d86b 51%,
+        #9a9b54 100%
+    );
+}
 .Button:hover {
     background-position: right center; /* change the direction of the change here */
     color: white;

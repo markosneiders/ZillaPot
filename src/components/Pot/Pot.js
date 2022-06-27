@@ -3,13 +3,10 @@ import "./Pot.css"
 
 function Pot(props) {
     return (
-        <div
-            className="Pot"
-            onClick={() => props.click(props.data.id, props.data.status)}
-        >
+        <div className="Pot" onClick={() => props.click(props.data)}>
             <div
                 className={
-                    props.data.timeLeft <= "00:00:10:00"
+                    props.data.timeLeft <= "10:00"
                         ? "Pot__header-expiring"
                         : "Pot__header"
                 }
@@ -17,7 +14,7 @@ function Pot(props) {
                 <h3 className="Pot__header-text">{`#${props.data.id}`}</h3>
                 <h3
                     className={
-                        props.data.timeLeft <= "00:00:10:00"
+                        props.data.timeLeft <= "10:00"
                             ? "Pot__header-text-expiring"
                             : "Pot__header-text"
                     }
@@ -83,7 +80,7 @@ function Pot(props) {
                     </div>
                 </div>
                 <h3 className="Pot__body-text" style={{ fontWeight: 100 }}>
-                    {`${props.data.contributions} contributions`}
+                    {`${props.data.deposits.length} contributions`}
                 </h3>
             </div>
         </div>

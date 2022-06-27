@@ -3,10 +3,7 @@ import "./LPot.css"
 
 function LPot(props) {
     return (
-        <div
-            className="LPot"
-            onClick={() => props.click(props.data.id, props.data.status)}
-        >
+        <div className="LPot" onClick={() => props.click(props.data)}>
             <div className="LPot__header">
                 <h3 className="LPot__header-text">{`#${props.data.id}`}</h3>
                 <h3 className="LPot__header-text">Lost</h3>

@@ -3,10 +3,7 @@ import "./EPot.css"
 
 function EPot(props) {
     return (
-        <div
-            className="EPot"
-            onClick={() => props.click(props.data.id, props.data.status)}
-        >
+        <div className="EPot" onClick={() => props.click(props.data)}>
             <div className="EPot__header">
                 <h3 className="EPot__header-text">{`#${props.data.id}`}</h3>
                 <h3 className="EPot__header-text">Expired</h3>
@@ -42,7 +39,7 @@ function EPot(props) {
                     </div>
                 </div>
                 <h3 className="EPot__body-text" style={{ fontWeight: 100 }}>
-                    {`${props.data.contributions} total contributions`}
+                    {`${props.data.deposits.length} total contributions`}
                 </h3>
             </div>
         </div>

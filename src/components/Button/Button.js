@@ -4,7 +4,10 @@ import ZilPay from "../../assets/images/ZilPay.png"
 
 function Button(props) {
     return (
-        <button className="Button" onClick={props.onClick}>
+        <button
+            className={props.golden ? "Button Button--golden" : "Button"}
+            onClick={props.onClick}
+        >
             <h1 className="Button__text">{props.text}</h1>
             {props.logo === true ? (
                 <img

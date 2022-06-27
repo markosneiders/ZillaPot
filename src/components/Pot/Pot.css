@@ -89,11 +89,8 @@
     color: rgba(27, 181, 148, 0.5);
     transition: 0.5s;
 }
-.Pot:hover .APot__header-text-expiring {
-    color: rgba(181, 27, 27, 1);
-}
 .Pot:hover .Pot__header-text-expiring {
-    color: rgba(27, 181, 148, 1);
+    color: rgba(181, 27, 27, 1);
 }
 
 .Pot__body {

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import "./PotBuy.css"
-import TempData from "./TempData.json"
 
 //Component imports
 import Button from "../../components/Button/Button"
@@ -17,22 +16,20 @@ function PotBuy() {
     const location = useLocation()
     const navigation = useNavigate()
 
-    const [historyData, setHistoryData] = useState(TempData)
     const [deposit, setDeposit] = useState()
     const [infoModal, setInfoModal] = useState(false)
-    const [status, setStatus] = useState("")
 
     const formatAddress = (address) => {
         return `${address.slice(0, 6)}...${address.slice(-4)}`
     }
 
-    const history = historyData.map((item) => (
+    const history = location.state.deposits.map((item) => (
         <div className="PotBuy__container-body-historyList-item">
             <h1 className="PotBuy__container-body-historyList-item-text">
                 {formatAddress(item.address)}
             </h1>
             <h1 className="PotBuy__container-body-historyList-item-text">
-                {`+${item.amount} ZIL`}
+                {`+${item.deposited} ZIL`}
             </h1>
             <h1 className="PotBuy__container-body-historyList-item-text">
                 {`${item.newTotal} ZIL`}
@@ -42,13 +39,26 @@ function PotBuy() {
 
     function openInfo() {
         setInfoModal(true)
-        console.log(location.state.status)
     }
     function closeInfo() {
         setInfoModal(false)
     }
+    function handleDeposit() {
+        console.log(
+            `${localStorage.getItem("userAddress")} wants to deposit ${
+                location.state.buyIn
+            } ZIL to ${location.state.id}`
+        )
+    }
+    function handleClaim() {
+        console.log(
+            `${localStorage.getItem("userAddress")} wants to claim ${
+                location.state.potSize
+            } ZIL from ${location.state.id}`
+        )
+    }
     useEffect(() => {
-        setStatus("--expired")
+        console.log(location.state.status)
     }, [])
     return (
         <div
@@ -74,7 +84,7 @@ function PotBuy() {
                 <div className="PotBuy__container-header">
                     <h1 className="PotBuy__container-header-title">Overview</h1>
                     <h1 className="PotBuy__container-header-title">
-                        #337474458
+                        {`#${location.state.id}`}
                     </h1>
                 </div>
                 <div className="PotBuy__container-body">
@@ -118,7 +128,7 @@ function PotBuy() {
                             Pot value
                         </h1>
                         <h1 className="PotBuy__container-body-title">
-                            9858.95
+                            {location.state.potSize}
                         </h1>
                         <h1 className="PotBuy__container-body-text">ZIL</h1>
                     </div>
@@ -130,14 +140,15 @@ function PotBuy() {
                             justifyContent: "space-around",
                         }}
                     >
-                        {location.state.status === 0 ? (
+                        {location.state.status === 0 ||
+                        location.state.status === 4 ? (
                             <>
                                 <div className="PotBuy__container-body-textContainer">
                                     <h1 className="PotBuy__container-body-text">
                                         Time left
                                     </h1>
                                     <h1 className="PotBuy__container-body-title">
-                                        15:53:13
+                                        {location.state.timeLeft}
                                     </h1>
                                     <h1 className="PotBuy__container-body-text">
                                         hh:mm:ss
@@ -149,7 +160,7 @@ function PotBuy() {
                                         Minimum deposit
                                     </h1>
                                     <h1 className="PotBuy__container-body-title">
-                                        583.93
+                                        {location.state.buyIn}
                                     </h1>
                                     <h1 className="PotBuy__container-body-text">
                                         ZIL
@@ -167,11 +178,19 @@ function PotBuy() {
                             </div>
                         )}
                     </div>
-                    {location.state.status === 0 ? (
+                    {location.state.status === 0 ||
+                    location.state.status === 4 ? (
                         <Button
                             text={"Deposit minimum"}
                             logo={false}
-                            onClick={() => {}}
+                            onClick={() => handleDeposit()}
+                        />
+                    ) : location.state.status === 2 ? (
+                        <Button
+                            golden={true}
+                            text={"Claim reward"}
+                            logo={false}
+                            onClick={() => handleClaim()}
                         />
                     ) : null}
                 </div>
@@ -194,7 +213,7 @@ function PotBuy() {
                             History
                         </h1>
                         <h1 className="PotBuy__container-header-title">
-                            17 contributions
+                            {`${location.state.deposits.length} contributions`}
                         </h1>
                     </div>
                     <div

@@ -3,10 +3,7 @@ import "./APot.css"
 
 function APot(props) {
     return (
-        <div
-            className="APot"
-            onClick={() => props.click(props.data.id, props.data.status)}
-        >
+        <div className="APot" onClick={() => props.click(props.data)}>
             <div
                 className={
                     props.data.timeLeft <= "00:00:10:00"
@@ -83,7 +80,7 @@ function APot(props) {
                     </div>
                 </div>
                 <h3 className="APot__body-text" style={{ fontWeight: 100 }}>
-                    {`${props.data.contributions} contributions`}
+                    {`${props.data.deposits.length} contributions`}
                 </h3>
             </div>
         </div>

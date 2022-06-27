@@ -3,10 +3,7 @@ import "./WPot.css"
 
 function WPot(props) {
     return (
-        <div
-            className="WPot"
-            onClick={() => props.click(props.data.id, props.data.status)}
-        >
+        <div className="WPot" onClick={() => props.click(props.data)}>
             <div className="WPot__header">
                 <h3 className="WPot__header-text">{`#${props.data.id}`}</h3>
                 <h3 className="WPot__header-text">Winner!</h3>

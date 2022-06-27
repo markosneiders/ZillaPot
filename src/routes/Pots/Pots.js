@@ -45,7 +45,36 @@ function Pots() {
         sortData()
     }, [sort])
 
-    async function getData() {}
+    async function getData() {
+        addStatus()
+    }
+    async function addStatus() {
+        var data = rawData
+        for (var i = 0; i < data.length; i++) {
+            if (
+                data[i].timeLeft !== "00:00" &&
+                data[i].deposits.some(
+                    (e) => e.address === localStorage.getItem("userAddress")
+                )
+            ) {
+                data[i].status = 4
+            } else if (data[i].timeLeft !== "00:00") {
+                data[i].status = 0
+            } else if (
+                data[i].wonBy !== localStorage.getItem("userAddress") &&
+                data[i].deposits.some(
+                    (e) => e.address === localStorage.getItem("userAddress")
+                )
+            ) {
+                data[i].status = 1
+            } else if (data[i].wonBy === localStorage.getItem("userAddress")) {
+                data[i].status = 2
+            } else {
+                data[i].status = 3
+            }
+        }
+        setRawData(data)
+    }
 
     async function sortData() {
         if (sort.type === "Value" && sort.direction === "Descending") {
@@ -91,8 +120,16 @@ function Pots() {
             )
             setSortedData(numAscending)
         }
-        console.log(sortedData)
     }
+
+    //Pot status meaning
+    //Status is added after the data is fetched and is related to the user for display pourpuses
+    //A status of:
+    //0 means the pot is active and not joined
+    //1 the pot is expired without participating
+    //2 the user has won the pot
+    //3 the user has lost the pot
+    //4 the user has joined the pot and it's on going
     const potOptions = [
         {
             label: "Active Pots",
@@ -100,11 +137,11 @@ function Pots() {
         },
         {
             label: "All Pots",
-            value: [0, 1, 2, 3],
+            value: [0, 1, 2, 3, 4],
         },
         {
             label: "Joined Pots",
-            value: [0, 0, 0, 0],
+            value: [4],
         },
         {
             label: "Won Pots",
@@ -168,11 +205,13 @@ function Pots() {
                 <WPot data={item} click={handlePotClick} />
             ) : item.status === 3 ? (
                 <LPot data={item} click={handlePotClick} />
+            ) : item.status === 4 ? (
+                <APot data={item} click={handlePotClick} />
             ) : null
         )
 
-    function handlePotClick(id, status) {
-        navigate("buy", { state: { id: id, status: status } })
+    function handlePotClick(item) {
+        navigate("buy", { state: item })
     }
 
     return (
