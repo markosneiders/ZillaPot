@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import LandingPage from "./routes/LandingPage/LandingPage"
 import Pots from "./routes/Pots/Pots"
 import PotBuy from "./routes/PotBuy/PotBuy"
+import PotCreate from "./routes/PotCreate/PotCreate"
 import Help from "./routes/Help/Help"
 import Profile from "./routes/Profile/Profile"
 
@@ -26,10 +27,12 @@ function ZilliqaListener() {
                 .observableAccount()
                 .subscribe(function (account) {
                     if (
-                        sessionStorage.getItem("userAddress") !==
-                        window.zilPay.wallet.defaultAccount.bech32
+                        localStorage.getItem("userAddress") !==
+                            window.zilPay.wallet.defaultAccount.bech32 &&
+                        localStorage.getItem("isConnected") === true
                     ) {
-                        sessionStorage.setItem(
+                        console.log("index setting address")
+                        localStorage.setItem(
                             "userAddress",
                             window.zilPay.wallet.defaultAccount.bech32
                         )
@@ -73,6 +76,7 @@ root.render(
             <Route path="/" element={<LandingPage />} />
             <Route path="pots" element={<Pots />} />
             <Route path="pots/buy/:id" element={<PotBuy />} />
+            <Route path="pots/create" element={<PotCreate />} />
             <Route path="help" element={<Help />} />
             <Route path="profile" element={<Profile />} />
         </Routes>

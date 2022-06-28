@@ -52,3 +52,22 @@
     font-weight: 100;
     cursor: pointer;
 }
+.Pots__container-noneFound {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.Pots__container-noneFound-title {
+    background-image: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.4),
+        rgba(0, 0, 0, 0.1)
+    );
+    background-clip: text;
+    color: transparent;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 70px;
+    text-align: center;
+    text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}

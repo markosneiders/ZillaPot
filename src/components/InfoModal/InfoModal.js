@@ -4,8 +4,12 @@ function InfoModal(props) {
     return (
         <div className="InfoModal">
             <div className="InfoModal__header">
-                <h1 className="InfoModal__header-title">Info</h1>
-                <h1 className="InfoModal__header-title">#337474458</h1>
+                <h1 className="InfoModal__header-title">
+                    {props.headerLeftText}
+                </h1>
+                <h1 className="InfoModal__header-title">
+                    {props.headerRightText}
+                </h1>
             </div>
             <div className="InfoModal__body">
                 <div

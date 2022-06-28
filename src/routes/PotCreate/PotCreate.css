@@ -1,0 +1,107 @@
+.PotCreate {
+    background-color: hsla(188, 51%, 17%, 1);
+    background-image: radial-gradient(
+            at 4% 91%,
+            hsla(184, 48%, 28%, 1) 0px,
+            transparent 50%
+        ),
+        radial-gradient(
+            at 100% 100%,
+            hsla(179, 60%, 45%, 1) 0px,
+            transparent 50%
+        );
+}
+.PotCreate__container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.Container__content {
+    margin-top: 32px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box; /* Firefox, other Gecko */
+    box-sizing: border-box; /* Opera/IE 8+ */
+}
+.Container__content-inputLine {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.Container__content-inputLine-title {
+    margin-right: 128px;
+    background-image: linear-gradient(
+        20deg,
+        rgba(27, 181, 148, 0.3),
+        rgba(27, 181, 148, 1)
+    );
+    background-clip: text;
+    color: transparent;
+}
+.PotCreate__container-form {
+    margin: 8px;
+}
+.PotCreate__container-input {
+    width: 100px;
+    text-align: center;
+    height: fit-content;
+    font-size: 25px;
+    border-radius: 20px;
+    background-color: transparent;
+    padding: 16px;
+    border: none;
+    background-image: linear-gradient(
+        to right,
+        #153c42 0%,
+        #266970 51%,
+        #153c42 100%
+    );
+    background-size: 200%;
+    background-clip: padding-box, border-box;
+    background-origin: border-box;
+    box-shadow: 0 0 10px #000 inset;
+    color: rgba(256, 256, 256, 0.7);
+}
+.PotCreate__container-input::placeholder {
+    color: rgba(256, 256, 256, 0.2);
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+textarea:focus,
+input:focus {
+    outline: none;
+}
+.Modal {
+    outline: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.Modal__container {
+    overflow-y: scroll;
+}
+.Modal__container-title {
+    background-image: linear-gradient(
+        20deg,
+        rgba(27, 181, 148, 0.3),
+        rgba(27, 181, 148, 1)
+    );
+    background-clip: text;
+    color: transparent;
+}
+.Modal__container-text {
+    color: rgba(27, 181, 148, 1);
+    font-weight: 100;
+    margin-bottom: 32px;
+}

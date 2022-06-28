@@ -18,7 +18,7 @@
 }
 .Navbar__links {
     display: flex;
-    width: 50%;
+    width: 60%;
     justify-content: space-between;
     align-items: center;
 }

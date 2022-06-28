@@ -101,7 +101,7 @@
     box-sizing: border-box; /* Opera/IE 8+ */
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     position: relative;
 }
@@ -123,40 +123,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-.PotBuy__container-body-form {
-    margin-right: 0px;
-}
-.PotBuy__container-body-input {
-    width: 100%;
-    height: fit-content;
-    font-size: 25px;
-    border-radius: 20px;
-    background-color: transparent;
-    padding: 16px;
-    border: none;
-    background-image: linear-gradient(
-        to right,
-        #153c42 0%,
-        #266970 51%,
-        #153c42 100%
-    );
-    background-size: 200%;
-    background-clip: padding-box, border-box;
-    background-origin: border-box;
-    box-shadow: 0 0 10px #000 inset;
-    color: rgba(256, 256, 256, 0.7);
-}
-.PotBuy__container-body-input::placeholder {
-    color: rgba(256, 256, 256, 0.2);
-}
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-}
-textarea:focus,
-input:focus {
-    outline: none;
 }
 .PotBuy__container-body-historyList {
     display: flex;
@@ -192,4 +158,11 @@ input:focus {
     font-weight: 100;
     width: 100px;
     font-size: 22px;
+}
+.ClaimAndShare {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }

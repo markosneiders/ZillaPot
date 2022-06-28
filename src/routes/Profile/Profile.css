@@ -25,3 +25,8 @@
 .Profile__cards {
     display: flex;
 }
+.Profile__container__contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
