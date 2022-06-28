@@ -23,29 +23,10 @@ function LandingPage() {
 
     const navigate = useNavigate()
 
-    function checkWallet() {
-        if (window.zilPay) {
-            return true
-        } else {
-            return false
-        }
-    }
-
-    async function connectWallet() {
-        return await window.zilPay.wallet.connect()
-    }
-
-    async function handleConnect() {
-        const check1 = checkWallet()
-        const check2 = await connectWallet()
-        if (check1 && check2) {
-            localStorage.setItem(
-                "userAddress",
-                window.zilPay.wallet.defaultAccount.bech32
-            )
+    const connectZilPay = async () => {
+        if (window.zilPay.wallet) {
+            await window.zilPay.wallet.connect()
             navigate("/pots")
-        } else {
-            alert("Please connect to Zilla")
         }
     }
 
@@ -66,13 +47,14 @@ function LandingPage() {
                 <h1 className="LandingPage__main-text">
                     First sunk cost game on the Zilliqa chain
                 </h1>
+
                 <Button
                     text={"Connect to ZilPay"}
                     logo={true}
-                    onClick={() => {
-                        handleConnect()
-                    }}
+                    logoSize={"50px"}
+                    onClick={() => connectZilPay()}
                 />
+
                 <div className="LandingPage__learnMore">
                     <h1 className="LandingPage__learnMore-text">Learn more</h1>
                     <KeyboardDoubleArrowDownIcon fontSize="large" />

@@ -54,20 +54,22 @@ function Pots() {
             if (
                 data[i].timeLeft !== "00:00" &&
                 data[i].deposits.some(
-                    (e) => e.address === localStorage.getItem("userAddress")
+                    (e) => e.address === sessionStorage.getItem("userAddress")
                 )
             ) {
                 data[i].status = 4
             } else if (data[i].timeLeft !== "00:00") {
                 data[i].status = 0
             } else if (
-                data[i].wonBy !== localStorage.getItem("userAddress") &&
+                data[i].wonBy !== sessionStorage.getItem("userAddress") &&
                 data[i].deposits.some(
-                    (e) => e.address === localStorage.getItem("userAddress")
+                    (e) => e.address === sessionStorage.getItem("userAddress")
                 )
             ) {
                 data[i].status = 1
-            } else if (data[i].wonBy === localStorage.getItem("userAddress")) {
+            } else if (
+                data[i].wonBy === sessionStorage.getItem("userAddress")
+            ) {
                 data[i].status = 2
             } else {
                 data[i].status = 3
@@ -211,7 +213,7 @@ function Pots() {
         )
 
     function handlePotClick(item) {
-        navigate("buy", { state: item })
+        navigate(`buy/${item.id}`)
     }
 
     return (

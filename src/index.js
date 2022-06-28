@@ -16,41 +16,45 @@ const root = ReactDOM.createRoot(document.getElementById("root"))
 
 function ZilliqaListener() {
     const [warning, setWarning] = useState(false)
+
     useEffect(() => {
-        window.addEventListener("zilPay", updateData())
-    }, [])
-    function updateData() {
-        function handleAccountChange() {
-            localStorage.setItem(
-                "userAddress",
-                window.zilPay.wallet.defaultAccount.bech32
-            )
-        }
-        function handleNetworkChange() {
+        setTimeout(function () {
             if (window.zilPay.wallet.net !== "mainnet") {
-                setWarning(true)
-            } else {
-                setWarning(false)
+                networkCheck()
             }
-        }
-        if (window.zilPay) {
             window.zilPay.wallet
                 .observableAccount()
                 .subscribe(function (account) {
-                    handleAccountChange()
+                    if (
+                        sessionStorage.getItem("userAddress") !==
+                        window.zilPay.wallet.defaultAccount.bech32
+                    ) {
+                        sessionStorage.setItem(
+                            "userAddress",
+                            window.zilPay.wallet.defaultAccount.bech32
+                        )
+                        window.location.reload()
+                    }
                 })
             window.zilPay.wallet.observableNetwork().subscribe(function (net) {
-                handleNetworkChange()
+                networkCheck()
             })
+        }, 500)
+    }, [])
+
+    function networkCheck() {
+        if (window.zilPay.wallet.net !== "mainnet") {
+            setWarning(true)
+        } else {
+            setWarning(false)
         }
     }
-
     return (
         <Modal open={warning}>
             <div className="Warning">
                 <Container
                     headerTitleLeft={"Warning: Unsupported network"}
-                    height={200}
+                    height={220}
                     content={
                         <h1 className="Warning__text">
                             Please switch over to the Zilliqa mainnet
@@ -68,7 +72,7 @@ root.render(
         <Routes className="index">
             <Route path="/" element={<LandingPage />} />
             <Route path="pots" element={<Pots />} />
-            <Route path="pots/buy" element={<PotBuy />} />
+            <Route path="pots/buy/:id" element={<PotBuy />} />
             <Route path="help" element={<Help />} />
             <Route path="profile" element={<Profile />} />
         </Routes>

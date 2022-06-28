@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import "./PotBuy.css"
+import TempData from "../Pots/TempData.json"
 
 //Component imports
 import Button from "../../components/Button/Button"
@@ -7,6 +8,7 @@ import InfoModal from "../../components/InfoModal/InfoModal"
 import NavBar from "../../components/NavBar/NavBar"
 
 import { useLocation } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined"
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft"
@@ -15,15 +17,20 @@ import { Modal } from "@mui/material"
 function PotBuy() {
     const location = useLocation()
     const navigation = useNavigate()
+    const { id } = useParams()
 
     const [deposit, setDeposit] = useState()
     const [infoModal, setInfoModal] = useState(false)
+
+    const currentPot = TempData.find((obj) => {
+        return obj.id === parseInt(id)
+    })
 
     const formatAddress = (address) => {
         return `${address.slice(0, 6)}...${address.slice(-4)}`
     }
 
-    const history = location.state.deposits.map((item) => (
+    const history = currentPot.deposits.map((item) => (
         <div className="PotBuy__container-body-historyList-item">
             <h1 className="PotBuy__container-body-historyList-item-text">
                 {formatAddress(item.address)}
@@ -45,20 +52,17 @@ function PotBuy() {
     }
     function handleDeposit() {
         console.log(
-            `${localStorage.getItem("userAddress")} wants to deposit ${
-                location.state.buyIn
-            } ZIL to ${location.state.id}`
+            `$ssessionStorage.getItem("userAddress")} wants to deposit ${currentPot.buyIn} ZIL to ${currentPot.id}`
         )
     }
     function handleClaim() {
         console.log(
-            `${localStorage.getItem("userAddress")} wants to claim ${
-                location.state.potSize
-            } ZIL from ${location.state.id}`
+            `$ssessionStorage.getItem("userAddress")} wants to claim ${currentPot.potSize} ZIL from ${currentPot.id}`
         )
     }
     useEffect(() => {
-        console.log(location.state.status)
+        console.log(id)
+        console.log(currentPot)
     }, [])
     return (
         <div
@@ -84,7 +88,7 @@ function PotBuy() {
                 <div className="PotBuy__container-header">
                     <h1 className="PotBuy__container-header-title">Overview</h1>
                     <h1 className="PotBuy__container-header-title">
-                        {`#${location.state.id}`}
+                        {`#${currentPot.id}`}
                     </h1>
                 </div>
                 <div className="PotBuy__container-body">
@@ -128,7 +132,7 @@ function PotBuy() {
                             Pot value
                         </h1>
                         <h1 className="PotBuy__container-body-title">
-                            {location.state.potSize}
+                            {currentPot.potSize}
                         </h1>
                         <h1 className="PotBuy__container-body-text">ZIL</h1>
                     </div>
@@ -140,15 +144,14 @@ function PotBuy() {
                             justifyContent: "space-around",
                         }}
                     >
-                        {location.state.status === 0 ||
-                        location.state.status === 4 ? (
+                        {currentPot.timeLeft !== "00:00" ? (
                             <>
                                 <div className="PotBuy__container-body-textContainer">
                                     <h1 className="PotBuy__container-body-text">
                                         Time left
                                     </h1>
                                     <h1 className="PotBuy__container-body-title">
-                                        {location.state.timeLeft}
+                                        {currentPot.timeLeft}
                                     </h1>
                                     <h1 className="PotBuy__container-body-text">
                                         hh:mm:ss
@@ -160,7 +163,7 @@ function PotBuy() {
                                         Minimum deposit
                                     </h1>
                                     <h1 className="PotBuy__container-body-title">
-                                        {location.state.buyIn}
+                                        {currentPot.buyIn}
                                     </h1>
                                     <h1 className="PotBuy__container-body-text">
                                         ZIL
@@ -178,14 +181,14 @@ function PotBuy() {
                             </div>
                         )}
                     </div>
-                    {location.state.status === 0 ||
-                    location.state.status === 4 ? (
+                    {currentPot.timeLeft !== "00:00" ? (
                         <Button
                             text={"Deposit minimum"}
                             logo={false}
                             onClick={() => handleDeposit()}
                         />
-                    ) : location.state.status === 2 ? (
+                    ) : currentPot.wonBy ===
+                      sessionStorage.getItem("userAddress") ? (
                         <Button
                             golden={true}
                             text={"Claim reward"}
@@ -213,7 +216,7 @@ function PotBuy() {
                             History
                         </h1>
                         <h1 className="PotBuy__container-header-title">
-                            {`${location.state.deposits.length} contributions`}
+                            {`${currentPot.deposits.length} contributions`}
                         </h1>
                     </div>
                     <div

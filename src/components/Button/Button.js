@@ -13,7 +13,7 @@ function Button(props) {
                 <img
                     src={ZilPay}
                     alt="ZilPay"
-                    width="50px"
+                    width={props.logoSize}
                     className="Button__image"
                 />
             ) : null}
