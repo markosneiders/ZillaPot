@@ -22,7 +22,6 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 
 
 
@@ -53,6 +52,9 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
+        <li><a href="#project-gaols">Project Goals</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pages">Pages</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
@@ -63,11 +65,8 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#creators">Creators</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
@@ -183,7 +182,7 @@ Make sure you have the latest [node and npm](https://nodejs.org/en/download/) ve
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-## Creators
+# Creators
 ZillaPot was made with love by @zappingmadnnes and @markosneiders <3
 * @zappingmadnnes created the gorgeous front-end
 * @markosneiders created the Scilla smart contract which drives the dapp 
@@ -191,7 +190,7 @@ ZillaPot was made with love by @zappingmadnnes and @markosneiders <3
 We learned so many new things and concepts while creating ZillaPot and would like to thank ZILHIVE for the challenge! 
 
 <!-- LICENSE -->
-## License
+# License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
@@ -199,7 +198,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 
 <!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
+# Acknowledgments
 
 * [ZilPay](https://zilpay.io/)
 * [Scilla](https://scilla-lang.org/index.html)
