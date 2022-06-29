@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import "./NavBar.css"
-
+import ZillaPotLogo from "../../assets/images/ZillaPotLogo.png"
 import Button from "../Button/Button"
 import { useLocation } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
@@ -11,53 +11,33 @@ function NavBar() {
     const [isConnected, setIsConnected] = useState(false)
 
     const connectZilPay = async () => {
+        console.log("Navbar connecting")
         if (window.zilPay.wallet) {
             await window.zilPay.wallet.connect()
-            sessionStorage.setItem("isConnected", true)
-            sessionStorage.setItem(
+            localStorage.setItem("isConnected", true)
+            localStorage.setItem(
                 "userAddress",
                 window.zilPay.wallet.defaultAccount.bech32
             )
             console.log("Connect done")
+            window.location.reload()
         } else {
             console.log("Connect failed")
         }
     }
 
     useEffect(() => {
-        setUserAddress(sessionStorage.getItem("userAddress"))
-        setIsConnected(sessionStorage.getItem("isConnected"))
-    }, [window.sessionStorage])
-
-    // function checkWallet() {
-    //     if (window.zilPay) {
-    //         return true
-    //     } else {
-    //         return false
-    //     }
-    // }
-
-    // async function connectWallet() {
-    //     return await window.zilPay.wallet.connect()
-    // }
-
-    // async function handleConnect() {
-    //     const check1 = checkWallet()
-    //     const check2 = await connectWallet()
-    //     if (check1 && check2) {
-    //         localStorage.setItem(
-    //             "userAddress",
-    //             window.zilPay.wallet.defaultAccount.bech32
-    //         )
-    //         console.log("Connected")
-    //     } else {
-    //         alert("Please connect to Zilla")
-    //     }
-    // }
+        setUserAddress(localStorage.getItem("userAddress"))
+        setIsConnected(localStorage.getItem("isConnected"))
+    }, [window.localStorage])
 
     return (
         <div className="NavBar">
-            <div className="Navbar__logo">ZillaPot</div>
+            <div className="NavBar__logo" onClick={() => navigation("/")}>
+                <img src={ZillaPotLogo} width={100} />
+                <div className="Navbar__logo-title">ZillaPot</div>
+            </div>
+
             <div className="Navbar__links">
                 <h1
                     onClick={() => navigation("/")}
@@ -80,6 +60,16 @@ function NavBar() {
                     Pots
                 </h1>
                 <h1
+                    onClick={() => navigation("/pots/create")}
+                    className={
+                        location.pathname === "/pots/create"
+                            ? "Navbar__links-text-active"
+                            : "Navbar__links-text"
+                    }
+                >
+                    Create pot
+                </h1>
+                <h1
                     onClick={() => navigation("/help")}
                     className={
                         location.pathname === "/help"
@@ -90,7 +80,7 @@ function NavBar() {
                     Help/About
                 </h1>
 
-                {isConnected ? (
+                {isConnected === "true" ? (
                     <Button
                         onClick={() => navigation("/profile")}
                         text={`${userAddress.slice(0, 6)}...${userAddress.slice(
@@ -99,7 +89,7 @@ function NavBar() {
                     />
                 ) : (
                     <Button
-                        text="Log in with ZilPay"
+                        text="Connect with ZilPay"
                         logo={true}
                         logoSize={"35px"}
                         onClick={() => connectZilPay()}

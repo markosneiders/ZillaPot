@@ -5,30 +5,36 @@ import Container from "../../components/Container/Container"
 import NavBar from "../../components/NavBar/NavBar"
 import Button from "../../components/Button/Button"
 
+import TempData from "../Pots/TempData.json"
+import { useNavigate } from "react-router-dom"
+
 function Profile() {
-    const [userData, setUserData] = useState({
-        address: localStorage.getItem("userAddress"),
-        balance: "",
+    const [userAddress, setUserAddress] = useState(
+        localStorage.getItem("userAddress")
+    )
+
+    const navigate = useNavigate()
+
+    function handleDisconnect() {
+        localStorage.setItem("isConnected", false)
+        localStorage.setItem("userAddress", "")
+        navigate("/")
+    }
+    const timesWon = TempData.filter((item) => item.wonBy === userAddress)
+
+    const timesParticiapted = TempData.filter((item) =>
+        item.deposits.find((obj) => {
+            return obj.address === userAddress
+        })
+    )
+    const timesLost = timesParticiapted.length - timesWon.length
+
+    useEffect(() => {
+        if (localStorage.getItem("isConnected") !== "true") {
+            navigate("/")
+        }
     })
 
-    const winnerData = {
-        id: 12,
-        potSize: 12,
-    }
-    const loserData = {
-        id: 8,
-        potSize: 8,
-    }
-    const regularData = {
-        id: 20,
-        potSize: 20,
-    }
-    async function getUserData() {
-        console.log(window.zilPay)
-    }
-    useEffect(() => {
-        getUserData()
-    }, [])
     return (
         <div
             className="Profile"
@@ -42,45 +48,75 @@ function Profile() {
                     width={"fit-content"}
                     height={"fit-content"}
                     headerTitleLeft="Profile"
-                    headerTitleRight={`${userData.address.slice(
+                    headerTitleRight={`${userAddress.slice(
                         0,
                         6
-                    )}...${userData.address.slice(-6)}`}
+                    )}...${userAddress.slice(-6)}`}
                     content={
-                        <div className="Profile__cards">
-                            <div className="Pot" style={{ cursor: "default" }}>
-                                <div className="Pot__header">
-                                    <h3 className="Pot__header-text">{`#${regularData.id}`}</h3>
-                                    <h3 className="Pot__header-text">Joined</h3>
+                        <div className="Profile__container__contents">
+                            <div className="Profile__cards">
+                                <div
+                                    className="Pot"
+                                    style={{ cursor: "default" }}
+                                >
+                                    <div className="Pot__header">
+                                        <h3 className="Pot__header-text">{`#${timesParticiapted.length}`}</h3>
+                                        <h3 className="Pot__header-text">
+                                            Joined
+                                        </h3>
+                                    </div>
+                                    <div className="Pot__body">
+                                        <h3
+                                            className="Pot__body-title"
+                                            style={{ fontSize: 40 }}
+                                        >
+                                            You have joined
+                                        </h3>
+                                        <h1
+                                            className="Pot__body-title"
+                                            style={{ fontSize: "50px" }}
+                                        >
+                                            {timesParticiapted.length}
+                                        </h1>
+                                        <h3
+                                            className="Pot__body-text"
+                                            style={{
+                                                fontWeight: 100,
+                                                margin: 0,
+                                            }}
+                                        >
+                                            pots
+                                        </h3>
+                                    </div>
                                 </div>
-                                <div className="Pot__body">
-                                    <h3
-                                        className="Pot__body-title"
-                                        style={{ fontSize: 40 }}
-                                    >
-                                        You have joined
-                                    </h3>
-                                    <h1
-                                        className="Pot__body-title"
-                                        style={{ fontSize: "50px" }}
-                                    >
-                                        {regularData.potSize}
-                                    </h1>
-                                    <h3
-                                        className="Pot__body-text"
-                                        style={{ fontWeight: 100, margin: 0 }}
-                                    >
-                                        pots
-                                    </h3>
-                                </div>
-                            </div>
-                            <div className="WPot" style={{ cursor: "default" }}>
-                                <div className="WPot__header">
-                                    <h3 className="WPot__header-text">{`#${winnerData.id}`}</h3>
-                                    <h3 className="WPot__header-text">Won</h3>
-                                </div>
-                                <div className="WPot__body">
-                                    <div style={{ display: "flex" }}>
+                                <div
+                                    className="WPot"
+                                    style={{ cursor: "default" }}
+                                >
+                                    <div className="WPot__header">
+                                        <h3 className="WPot__header-text">{`#${timesWon.length}`}</h3>
+                                        <h3 className="WPot__header-text">
+                                            Won
+                                        </h3>
+                                    </div>
+                                    <div className="WPot__body">
+                                        <div style={{ display: "flex" }}>
+                                            <div
+                                                style={{
+                                                    display: "flex",
+                                                    flexDirection: "column",
+                                                    justifyContent: "center",
+                                                    alignItems: "center",
+                                                }}
+                                            >
+                                                <h1
+                                                    className="WPot__body-title"
+                                                    style={{ fontSize: "45px" }}
+                                                >
+                                                    You have won
+                                                </h1>
+                                            </div>
+                                        </div>
                                         <div
                                             style={{
                                                 display: "flex",
@@ -91,28 +127,47 @@ function Profile() {
                                         >
                                             <h1
                                                 className="WPot__body-title"
-                                                style={{ fontSize: "45px" }}
+                                                style={{ fontSize: "50px" }}
                                             >
-                                                You have won
+                                                {timesWon.length}
                                             </h1>
+                                            <h3
+                                                className="WPot__body-text"
+                                                style={{
+                                                    fontWeight: 100,
+                                                    margin: 0,
+                                                }}
+                                            >
+                                                times
+                                            </h3>
                                         </div>
                                     </div>
-                                    <div
-                                        style={{
-                                            display: "flex",
-                                            flexDirection: "column",
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                        }}
-                                    >
+                                </div>
+                                <div
+                                    className="LPot"
+                                    style={{ cursor: "default" }}
+                                >
+                                    <div className="LPot__header">
+                                        <h3 className="LPot__header-text">{`#${timesLost}`}</h3>
+                                        <h3 className="LPot__header-text">
+                                            Lost
+                                        </h3>
+                                    </div>
+                                    <div className="LPot__body">
                                         <h1
-                                            className="WPot__body-title"
+                                            className="LPot__body-title"
+                                            style={{ fontSize: "45px" }}
+                                        >
+                                            You have lost
+                                        </h1>
+                                        <h1
+                                            className="LPot__body-title"
                                             style={{ fontSize: "50px" }}
                                         >
-                                            {winnerData.potSize}
+                                            {timesLost}
                                         </h1>
                                         <h3
-                                            className="WPot__body-text"
+                                            className="LPot__body-text"
                                             style={{
                                                 fontWeight: 100,
                                                 margin: 0,
@@ -123,31 +178,12 @@ function Profile() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="LPot" style={{ cursor: "default" }}>
-                                <div className="LPot__header">
-                                    <h3 className="LPot__header-text">{`#${loserData.id}`}</h3>
-                                    <h3 className="LPot__header-text">Lost</h3>
-                                </div>
-                                <div className="LPot__body">
-                                    <h1
-                                        className="LPot__body-title"
-                                        style={{ fontSize: "45px" }}
-                                    >
-                                        You have lost
-                                    </h1>
-                                    <h1
-                                        className="LPot__body-title"
-                                        style={{ fontSize: "50px" }}
-                                    >
-                                        {loserData.potSize}
-                                    </h1>
-                                    <h3
-                                        className="LPot__body-text"
-                                        style={{ fontWeight: 100, margin: 0 }}
-                                    >
-                                        times
-                                    </h3>
-                                </div>
+                            <div>
+                                <Button
+                                    text={"Disconnect ZilPay"}
+                                    red={true}
+                                    onClick={() => handleDisconnect()}
+                                />
                             </div>
                         </div>
                     }

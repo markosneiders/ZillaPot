@@ -14,7 +14,16 @@ function Container(props) {
                     {props.headerTitleRight}
                 </h1>
             </div>
-            <div className="Container__body">{props.content}</div>
+            <div
+                className="Container__body"
+                style={
+                    props.scroll
+                        ? { overflowY: "scroll" }
+                        : { overflowY: "hidden" }
+                }
+            >
+                {props.content}
+            </div>
         </div>
     )
 }

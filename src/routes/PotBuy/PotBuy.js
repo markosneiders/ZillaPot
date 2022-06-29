@@ -6,6 +6,8 @@ import TempData from "../Pots/TempData.json"
 import Button from "../../components/Button/Button"
 import InfoModal from "../../components/InfoModal/InfoModal"
 import NavBar from "../../components/NavBar/NavBar"
+import ShareSheet from "../../components/ShareSheet/ShareSheet"
+import ConnectModal from "../../components/ConnectModal/ConnectModal"
 
 import { useLocation } from "react-router-dom"
 import { useParams } from "react-router-dom"
@@ -21,6 +23,7 @@ function PotBuy() {
 
     const [deposit, setDeposit] = useState()
     const [infoModal, setInfoModal] = useState(false)
+    const [connectModal, setConnectModal] = useState(false)
 
     const currentPot = TempData.find((obj) => {
         return obj.id === parseInt(id)
@@ -50,20 +53,26 @@ function PotBuy() {
     function closeInfo() {
         setInfoModal(false)
     }
+    function openConnect() {
+        setConnectModal(true)
+    }
+    function closeConnect() {
+        setConnectModal(false)
+    }
     function handleDeposit() {
-        console.log(
-            `$ssessionStorage.getItem("userAddress")} wants to deposit ${currentPot.buyIn} ZIL to ${currentPot.id}`
-        )
+        if (localStorage.getItem("isConnected") === "true") {
+            console.log(
+                `$ssessionStorage.getItem("userAddress")} wants to deposit ${currentPot.buyIn} ZIL to ${currentPot.id}`
+            )
+        } else {
+            openConnect()
+        }
     }
     function handleClaim() {
         console.log(
             `$ssessionStorage.getItem("userAddress")} wants to claim ${currentPot.potSize} ZIL from ${currentPot.id}`
         )
     }
-    useEffect(() => {
-        console.log(id)
-        console.log(currentPot)
-    }, [])
     return (
         <div
             className="PotBuy"
@@ -78,9 +87,13 @@ function PotBuy() {
             <Modal open={infoModal} onClose={() => closeInfo()}>
                 <InfoModal
                     headerLeftText={"Info"}
-                    headerRightText={"#337474458"}
+                    headerRightText={`#${currentPot.id}`}
                 />
             </Modal>
+            <Modal open={connectModal} onClose={() => closeConnect()}>
+                <ConnectModal />
+            </Modal>
+
             <div
                 className="PotBuy__container"
                 style={{ width: "40%", height: "80%", marginRight: 64 }}
@@ -188,13 +201,20 @@ function PotBuy() {
                             onClick={() => handleDeposit()}
                         />
                     ) : currentPot.wonBy ===
-                      sessionStorage.getItem("userAddress") ? (
-                        <Button
-                            golden={true}
-                            text={"Claim reward"}
-                            logo={false}
-                            onClick={() => handleClaim()}
-                        />
+                      localStorage.getItem("userAddress") ? (
+                        <div className="ClaimAndShare">
+                            <Button
+                                golden={true}
+                                text={"Claim reward"}
+                                logo={false}
+                                onClick={() => handleClaim()}
+                            />
+
+                            <ShareSheet
+                                id={currentPot.id}
+                                amount={currentPot.potSize}
+                            />
+                        </div>
                     ) : null}
                 </div>
             </div>

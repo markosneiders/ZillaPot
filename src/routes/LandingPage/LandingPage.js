@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom"
 import React, { useState, useEffect } from "react"
 import "./LandingPage.css"
 
@@ -11,6 +10,7 @@ import InfoCard from "../../components/InfoCard/InfoCard"
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown"
 import ScrollAnimation from "react-animate-on-scroll"
 import { useSpring, animated } from "react-spring"
+import { useNavigate } from "react-router-dom"
 // const { Zilliqa } = require("@zilliqa-js/zilliqa")
 // const zilliqa = new Zilliqa("https://dev-api.zilliqa.com")
 
@@ -26,6 +26,11 @@ function LandingPage() {
     const connectZilPay = async () => {
         if (window.zilPay.wallet) {
             await window.zilPay.wallet.connect()
+            localStorage.setItem("isConnected", true)
+            localStorage.setItem(
+                "userAddress",
+                window.zilPay.wallet.defaultAccount.bech32
+            )
             navigate("/pots")
         }
     }
@@ -35,6 +40,9 @@ function LandingPage() {
             className="LandingPage"
             style={{ height: window.innerHeight * 2, width: window.innerWidth }}
         >
+            <div style={{ position: "absolute", top: 0, width: "100%" }}>
+                <NavBar />
+            </div>
             <animated.div
                 className="LandingPage__main"
                 style={{
@@ -49,7 +57,7 @@ function LandingPage() {
                 </h1>
 
                 <Button
-                    text={"Connect to ZilPay"}
+                    text={"Connect with ZilPay"}
                     logo={true}
                     logoSize={"50px"}
                     onClick={() => connectZilPay()}

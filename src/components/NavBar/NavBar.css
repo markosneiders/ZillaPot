@@ -4,7 +4,13 @@
     align-items: center;
     justify-content: space-between;
 }
-.Navbar__logo {
+.NavBar__logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.Navbar__logo-title {
+    margin-left: 32px;
     background-image: linear-gradient(
         180deg,
         rgba(0, 0, 0, 0.4),
@@ -18,7 +24,7 @@
 }
 .Navbar__links {
     display: flex;
-    width: 50%;
+    width: 60%;
     justify-content: space-between;
     align-items: center;
 }

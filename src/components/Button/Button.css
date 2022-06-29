@@ -28,6 +28,14 @@
         #9a9b54 100%
     );
 }
+.Button--red {
+    background-image: linear-gradient(
+        to right,
+        #5a2121 0%,
+        #b43232 51%,
+        #5a2121 100%
+    );
+}
 .Button:hover {
     background-position: right center; /* change the direction of the change here */
     color: white;

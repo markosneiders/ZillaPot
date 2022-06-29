@@ -26,14 +26,6 @@ function Pots() {
     const [rawData, setRawData] = useState(TempData)
     const [sortedData, setSortedData] = useState([{}])
 
-    // const addr = window.zilPay.wallet.defaultAccount.bech32
-
-    // function getBalance() {
-    //     window.zilPay.blockchain.getBalance(addr).then(function (resp) {
-    //         console.log(resp)
-    //     })
-    // }
-
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -54,24 +46,22 @@ function Pots() {
             if (
                 data[i].timeLeft !== "00:00" &&
                 data[i].deposits.some(
-                    (e) => e.address === sessionStorage.getItem("userAddress")
+                    (e) => e.address === localStorage.getItem("userAddress")
                 )
             ) {
                 data[i].status = 4
             } else if (data[i].timeLeft !== "00:00") {
                 data[i].status = 0
             } else if (
-                data[i].wonBy !== sessionStorage.getItem("userAddress") &&
+                data[i].wonBy !== localStorage.getItem("userAddress") &&
                 data[i].deposits.some(
-                    (e) => e.address === sessionStorage.getItem("userAddress")
+                    (e) => e.address === localStorage.getItem("userAddress")
                 )
             ) {
                 data[i].status = 1
-            } else if (
-                data[i].wonBy === sessionStorage.getItem("userAddress")
-            ) {
+            } else if (data[i].wonBy === localStorage.getItem("userAddress")) {
                 data[i].status = 2
-            } else {
+            } else if (localStorage.getItem("userAddress") !== "") {
                 data[i].status = 3
             }
         }
@@ -355,7 +345,17 @@ function Pots() {
                     </div>
                 </div>
             </div>
-            <div className="Pots__container">{pots}</div>
+            <div className="Pots__container">
+                {pots.length === 0 ? (
+                    <div className="Pots__container-noneFound">
+                        <h1 className="Pots__container-noneFound-title">
+                            No pots matching the criteria found
+                        </h1>
+                    </div>
+                ) : (
+                    pots
+                )}
+            </div>
         </div>
     )
 }
