@@ -6,33 +6,43 @@ scilla_version 0
 (*               Associated library                *)
 (***************************************************)
 
-import IntUtils
+import IntUtils ListUtils BoolUtils
 
 library ZillaPot
-
-(*type Pot =*)
-(*  | Creator of ByStr20*)
-(*  | Expiration of Uint256*)
-(*  | MaxExpiration of Uint256*)
-(*  | InitialBuyIn of Uint256*)
-(*  | CurrentBuyIn of Uint256*)
-(*  | CurrentPot of Uint256*)
-(*  | BuyInIncrement of Uint256*)
-(*  | Extension of Uint256*)
-(*  | CurrentWinner of ByStr20*)
-(*  | Claimed of Bool*)
   
-(* Creator, Expiration, MaxExpiration, InitialBuyIn, CurrentBuyIn,  CurrentPot, BuyInIncrement, Extension, CurrentWinner  *)
+(* Creator, Expiration, InitialBuyIn, CurrentBuyIn,  CurrentPot, BuyInIncrement, Extension, CurrentWinner Claimed  *)
 type PotSettings =
-| PotSettings of ByStr20 Uint256 Uint256 Uint256 Uint256 Uint256 Uint256 Uint256 ByStr20 
+| PotSettings of ByStr20 BNum Uint128 Uint128 Uint128 Uint128 Uint128 ByStr20 Bool
 
-let one = Uint256 1
+let one = Uint128 1
+let false = False
+let true = True
+let empty_list = Nil {ByStr20}
+
+let one_msg = 
+  fun (msg : Message) => 
+    let nil_msg = Nil {Message} in
+    Cons {Message} msg nil_msg
+    
+let blk_leq =
+  fun (blk1 : BNum) =>
+  fun (blk2 : BNum) =>
+    let bc1 = builtin blt blk1 blk2 in 
+    let bc2 = builtin eq blk1 blk2 in 
+    orb bc1 bc2
 
 (*** Codes ***)
-let pot_exists = Uint32 1
-let pot_doesnt_exist = Uint32 2
-let pot_creation_success = Uint32 3
-let pot_creation_failure = Uint32 4
+let pot_exists_code = Uint32 1
+let pot_doesnt_exist_code = Uint32 2
+let pot_creation_success_code = Uint32 3
+let pot_creation_failure_code = Uint32 4
+let succesfully_deposited_code = Uint32 5
+let failed_deposit_deposited_code = Uint32 6
+let funds_successfully_claimed_code = Uint32 7
+let pot_already_claimed_code = Uint32 8
+let sender_not_winner_code = Uint32 9
+let pot_expired_code = Uint32 10
+let pot_not_expired_code = Uint32 11
 
 
 
@@ -44,9 +54,11 @@ contract ZillaPot
 ()
 
 (*** Mutable Fields ***)
-field pot_map : Map Uint256 PotSettings = Emp Uint256 PotSettings
+field players : List ByStr20 = empty_list
 
-field nPots : Uint256 = Uint256 0
+field pot_map : Map Uint128 PotSettings = Emp Uint128 PotSettings
+
+field nPots : Uint128 = Uint128 0
 
 (***************************************)
 (*             Transitions             *)
@@ -54,7 +66,10 @@ field nPots : Uint256 = Uint256 0
 
 (*** Getters ***)
 
-transition getTime()
+transition getCurrentBlock()
+  blk <- & BLOCKNUMBER;
+  e = { _eventname : "The current Block"; block : blk };
+  event e
 end
 
 transition numPots()
@@ -63,95 +78,152 @@ transition numPots()
   event e
 end
 
-transition potExists(potId_ : Uint256)
+transition potExists(potId_ : Uint128)
   total <- nPots;
-  existingPot = uint256_lt potId_ total;
+  existingPot = uint128_lt potId_ total;
   
   match existingPot with
     | True =>
-      e = { _eventname : "Pot Exists"; code : pot_exists };
+      e = { _eventname : "Pot Exists"; code : pot_exists_code };
       event e
     | False =>
-      e = { _eventname : "Pot Doesn't Exists"; code : pot_doesnt_exist };
+      e = { _eventname : "Pot Doesn't Exists"; code : pot_doesnt_exist_code };
       event e
   end
 end
 
-transition getCreator(potId_ : Uint256)
+transition getCreator(potId_ : Uint128)
 end
 
-transition getExpiration(potId_ : Uint256)
+transition getExpiration(potId_ : Uint128)
 end
 
-transition getMaxExpiration(potId_ : Uint256)
+transition getMaxExpiration(potId_ : Uint128)
 end
 
-transition expired(potId_ : Uint256)
+transition expired(potId_ : Uint128)
 end
 
-transition getInitialBuyIn(potId_ : Uint256)
+transition getInitialBuyIn(potId_ : Uint128)
 end
 
-transition getCurrentBuyIn(potId_ : Uint256)
+transition getCurrentBuyIn(potId_ : Uint128)
 end
 
-transition getCurrentPot(potId_ : Uint256)
+transition getCurrentPot(potId_ : Uint128)
 end
 
-transition getBuyInIncrement(potId_ : Uint256)
+transition getBuyInIncrement(potId_ : Uint128)
 end
 
-transition getTimeExtension(potId_ : Uint256)
+transition getTimeExtension(potId_ : Uint128)
 end
 
-transition getCurrentWinner(potId_ : Uint256)
+transition getCurrentWinner(potId_ : Uint128)
 end
 
-(*** Game Managment ***)
+(*** Game Flow ***)
 
-transition createPot(expiration_ : Uint256, maxExpiration_ : Uint256, initialBuyIn_ : Uint256, buyInIncrement_ : Uint256, extension_ : Uint256)
+
+(** Pot Creation **)
+transition createPot(expiration_ : BNum, buyInIncrement_ : Uint128, extension_ : Uint128)
+  initialBuyIn_ = _amount;
+  
   currentBuyIn_ = builtin add initialBuyIn_ buyInIncrement_;
   currentPot_ = initialBuyIn_;
-  new_pot = PotSettings _sender expiration_ maxExpiration_ initialBuyIn_ currentBuyIn_ currentPot_ buyInIncrement_ extension_ _sender;
+  new_pot = PotSettings _sender expiration_ initialBuyIn_ currentBuyIn_ currentPot_ buyInIncrement_ extension_ _sender false;
   potId <- nPots;
   pot_map[potId] := new_pot;
   new_nPots = builtin add potId one;
   nPots := new_nPots;
   
-  is_pot_created = uint256_lt potId new_nPots;
+  is_pot_created = uint128_lt potId new_nPots;
   match is_pot_created with
   | True =>
-    e = { _eventname : "New Pot Created"; code : pot_creation_success };
-    event e
+    e = { _eventname : "New Pot Created"; code : pot_creation_success_code };
+    event e;
+    accept
   | False =>
-    e = { _eventname : "Pot Creation Failed"; code : pot_creation_failure };
+    e = { _eventname : "Pot Creation Failed"; code : pot_creation_failure_code };
     event e
   end
 end
 
-
-transition buyIn(potId_ : Uint256)
+(** Claim Pot Winnings **)
+transition buyIn(potId_ : Uint128)
   game_o <- pot_map[potId_];
   match game_o with
   | Some game =>
     match game with
-    | PotSettings creator expiration maxExpiration initialBuyIn currentBuyIn currentPot buyInIncrement extension currentWinner =>
+    | PotSettings creator expiration initialBuyIn currentBuyIn currentPot buyInIncrement extension currentWinner claimed =>
+      blk <- & BLOCKNUMBER;
+      is_pot_expired = blk_leq expiration blk;
       
-      new_currentBuyIn = builtin add currentBuyIn buyInIncrement;
-      new_currentPot = builtin add currentPot currentBuyIn;
-      new_expiration = builtin add expiration extension;
-      
-      is_new_expiration = uint256_lt maxExpiration new_expiration;
-      
-
-      new_pot = PotSettings creator new_expiration maxExpiration initialBuyIn new_currentBuyIn new_currentPot buyInIncrement extension _sender;
-      pot_map[potId_] := new_pot
+      match is_pot_expired with
+      | True =>
+        e = { _eventname : "Pot Expired"; code : pot_expired_code };
+        event e
+      | False =>
+        is_enough_zill_sent = uint128_eq currentBuyIn _amount;
+        match is_enough_zill_sent with
+        | True =>
+          e = { _eventname : "Deposited Zill"; amount : _amount; code : succesfully_deposited_code };
+          event e;
+          accept
+        | False =>
+          e = { _eventname : "Deposit Failed"; amount : _amount; code : failed_deposit_deposited_code };
+          event e
+        end;
+        new_currentBuyIn = builtin add currentBuyIn buyInIncrement;
+        new_currentPot = builtin add currentPot currentBuyIn;
+        new_expiration = builtin badd expiration extension;
+  
+        new_pot = PotSettings creator new_expiration initialBuyIn new_currentBuyIn new_currentPot buyInIncrement extension _sender claimed;
+        pot_map[potId_] := new_pot
+      end
     end
   | None =>
   end
 end
 
-
-transition claimReward(potId_ : Uint256)
+(** Claim Pot Winnings **)
+transition claimReward(potId_ : Uint128)
+  game_o <- pot_map[potId_];
+  match game_o with
+  | Some game =>
+    match game with
+    | PotSettings creator expiration initialBuyIn currentBuyIn currentPot buyInIncrement extension currentWinner claimed  =>
+      blk <- & BLOCKNUMBER;
+      is_pot_expired = blk_leq expiration blk;
+      
+      match is_pot_expired with
+      | True =>
+        sender_is_winner = builtin eq _sender currentWinner;
+        match sender_is_winner with
+        | True =>
+          match claimed with
+          | False =>
+            e = {_eventname: "Withdraw Successful"; addr: _sender};
+            event e;
+            msg  = {_tag : ""; _recipient : _sender; _amount : currentPot; code : funds_successfully_claimed_code};
+            msgs = one_msg msg;
+            send msgs;
+            
+            new_pot = PotSettings creator expiration initialBuyIn currentBuyIn currentPot buyInIncrement extension currentWinner true;
+            pot_map[potId_] := new_pot
+          | True =>
+            e = { _eventname : "Pot Already Claimed"; code : pot_already_claimed_code };
+            event e
+          end
+        | False =>
+          e = { _eventname : "The Current Sender Is Not The Winner"; code : sender_not_winner_code };
+          event e
+        end
+      | False =>
+        e = { _eventname : "Pot Is not yet expired"; code : pot_not_expired_code };
+        event e
+      end
+    end
+  | None =>
+  end
 end
-
