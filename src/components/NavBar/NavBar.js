@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import "./NavBar.css"
-
+import ZillaPotLogo from "../../assets/images/ZillaPotLogo.png"
 import Button from "../Button/Button"
 import { useLocation } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
@@ -33,7 +33,11 @@ function NavBar() {
 
     return (
         <div className="NavBar">
-            <div className="Navbar__logo">ZillaPot</div>
+            <div className="NavBar__logo" onClick={() => navigation("/")}>
+                <img src={ZillaPotLogo} width={100} />
+                <div className="Navbar__logo-title">ZillaPot</div>
+            </div>
+
             <div className="Navbar__links">
                 <h1
                     onClick={() => navigation("/")}

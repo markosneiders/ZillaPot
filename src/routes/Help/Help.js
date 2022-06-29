@@ -58,15 +58,15 @@ function Help() {
                     select "create new pot" and then customize it to your liking 
                     if you are unsure about what each proprty does simply click 
                     the question mark to see an explanation. To start the pot you must 
-                    pay the starting deposit'
+                    pay the starting deposit.'
                 />
                 <InfoCard
                     variant={2}
                     title="Winning and losing"
                     text="If you're the last person to deposit into a pot you win it's contents. 
                     If not you lose, so keep a close eye on the pots at the end. After winning you 
-                    can claim your prize through the pot menu or your profile. In your profile you'll be able to see your stats such as 
-                    how many pots you have won or lost"
+                    can claim your prize through the pot menu. In your profile you'll be able to see your stats such as 
+                    how many pots you have won or lost."
                 />
             </div>
         </div>

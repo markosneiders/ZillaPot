@@ -18,6 +18,7 @@ function PotCreate() {
         initialValue: 100,
         potTime: 12000,
         depositIncrease: 10,
+        timeIncrease: 5,
     })
     const [info, setInfo] = useState(false)
     const [connectModal, setConnectModal] = useState(false)
@@ -80,6 +81,15 @@ function PotCreate() {
                                     ZIL. When creating the pot you will have to
                                     deposit this amount.
                                 </h2>
+
+                                <h1 className="Modal__container-title">
+                                    Minimum deposit increase
+                                </h1>
+                                <h2 className="Modal__container-text">
+                                    A value given in percent by which the
+                                    minimum deposit amount increases after every
+                                    deposit in relation to the previous deposit.
+                                </h2>
                                 <h1 className="Modal__container-title">
                                     Pot time
                                 </h1>
@@ -92,12 +102,11 @@ function PotCreate() {
                                     to help visualize the timespan.
                                 </h2>
                                 <h1 className="Modal__container-title">
-                                    Minimum deposit increase
+                                    Time increase
                                 </h1>
                                 <h2 className="Modal__container-text">
-                                    A value given in percent by which the
-                                    minimum deposit amount increases after every
-                                    deposit in relation to the previous deposit.
+                                    A value given in blocks which dictates how
+                                    much the time will be increased per deposit.
                                 </h2>
                             </>
                         }
@@ -173,7 +182,29 @@ function PotCreate() {
                                             value={potConfig.initialValue}
                                             onChange={(e) =>
                                                 setPotConfig({
+                                                    ...potConfig,
                                                     initialValue:
+                                                        e.target.value,
+                                                })
+                                            }
+                                        />
+                                    </form>
+                                </div>
+
+                                <div className="Container__content-inputLine">
+                                    <h1 className="Container__content-inputLine-title">
+                                        Min. deposit increase %
+                                    </h1>
+
+                                    <form className="PotCreate__container-form">
+                                        <input
+                                            className="PotCreate__container-input"
+                                            type="number"
+                                            value={potConfig.depositIncrease}
+                                            onChange={(e) =>
+                                                setPotConfig({
+                                                    ...potConfig,
+                                                    depositIncrease:
                                                         e.target.value,
                                                 })
                                             }
@@ -198,6 +229,7 @@ function PotCreate() {
                                             value={potConfig.potTime}
                                             onChange={(e) =>
                                                 setPotConfig({
+                                                    ...potConfig,
                                                     potTime: e.target.value,
                                                 })
                                             }
@@ -206,17 +238,24 @@ function PotCreate() {
                                 </div>
                                 <div className="Container__content-inputLine">
                                     <h1 className="Container__content-inputLine-title">
-                                        Min. deposit increase %
+                                        {`Pot time increase (${
+                                            Math.round(
+                                                ((potConfig.timeIncrease * 50) /
+                                                    3600) *
+                                                    100
+                                            ) / 100
+                                        } minutes)`}
                                     </h1>
 
                                     <form className="PotCreate__container-form">
                                         <input
                                             className="PotCreate__container-input"
                                             type="number"
-                                            value={potConfig.depositIncrease}
+                                            value={potConfig.timeIncrease}
                                             onChange={(e) =>
                                                 setPotConfig({
-                                                    depositIncrease:
+                                                    ...potConfig,
+                                                    timeIncrease:
                                                         e.target.value,
                                                 })
                                             }

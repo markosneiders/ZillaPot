@@ -21,7 +21,7 @@ import {
 import ContentCopyIcon from "@mui/icons-material/ContentCopy"
 
 function ShareSheet(props) {
-    const shareUrl = `http://ZillaPot.com/pots/buy/${props.id}`
+    const shareUrl = window.location.href
     const title = `I just won ${props.amount} ZIL on ZillaPot! Come check it out and join the fun!`
     return (
         <div className="ShareSheet">

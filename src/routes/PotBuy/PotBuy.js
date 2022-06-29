@@ -73,10 +73,6 @@ function PotBuy() {
             `$ssessionStorage.getItem("userAddress")} wants to claim ${currentPot.potSize} ZIL from ${currentPot.id}`
         )
     }
-    useEffect(() => {
-        console.log(id)
-        console.log(currentPot)
-    }, [])
     return (
         <div
             className="PotBuy"
@@ -205,7 +201,7 @@ function PotBuy() {
                             onClick={() => handleDeposit()}
                         />
                     ) : currentPot.wonBy ===
-                      sessionStorage.getItem("userAddress") ? (
+                      localStorage.getItem("userAddress") ? (
                         <div className="ClaimAndShare">
                             <Button
                                 golden={true}
