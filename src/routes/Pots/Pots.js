@@ -58,11 +58,11 @@ function Pots() {
                     (e) => e.address === localStorage.getItem("userAddress")
                 )
             ) {
-                data[i].status = 1
+                data[i].status = 3
             } else if (data[i].wonBy === localStorage.getItem("userAddress")) {
                 data[i].status = 2
-            } else if (localStorage.getItem("userAddress") !== "") {
-                data[i].status = 3
+            } else {
+                data[i].status = 1
             }
         }
         setRawData(data)

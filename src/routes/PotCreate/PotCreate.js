@@ -241,7 +241,7 @@ function PotCreate() {
                                         {`Pot time increase (${
                                             Math.round(
                                                 ((potConfig.timeIncrease * 50) /
-                                                    3600) *
+                                                    60) *
                                                     100
                                             ) / 100
                                         } minutes)`}
