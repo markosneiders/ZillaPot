@@ -92,7 +92,7 @@ transition potExists(potId_ : Uint128)
   end
 end
 
-transition getCreator(potId_ : Uint128)
+(* transition getCreator(potId_ : Uint128)
 end
 
 transition getExpiration(potId_ : Uint128)
@@ -120,7 +120,7 @@ transition getTimeExtension(potId_ : Uint128)
 end
 
 transition getCurrentWinner(potId_ : Uint128)
-end
+end *)
 
 (*** Game Flow ***)
 

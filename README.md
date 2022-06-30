@@ -39,7 +39,9 @@
     <br />
     Built for the ZILHIVE challenge in the GR14 hackathon
     <br />
-    <a href="https://github.com/markosneiders/ZillaPot"><strong>Try it out »</strong></a>
+    <a href="https://zilla-pot.vercel.app/"><strong>Try it out »</strong></a>
+       <br />
+    <a href="https://youtu.be/1Y7ox34NGnU"><strong>Watch the demo »</strong></a>
   </p>
 </div>
 
@@ -50,6 +52,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
+     <a href="#important-notice">Important Notice</a>
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#project-gaols">Project Goals</a></li>
@@ -73,9 +76,14 @@
 
 
 
+# Important notice
+When we set out to create ZillaPot we split the enourmous task between the two of us, one to handle the front-end and the other to ambiciously learn Scilla and create the smart contract. But as time went on and the front-end was almost complete, we hit a few roadblocks - combining the two. Even after reading all the docs, checking out other projects and asking for help from other Scilla developers, we couldn't hack it. Either due to our lack of knowledge of Scilla or too high ambitions we couldn't combine the two without making major sacrifices to the front-end. The contract is perfectly working, being able to create and deposit to pots, but lacking features to power some of our more ambitious front-end features such as pot history, profile stats and user specific pot displaying. Without these features ZillaPot would be incomplete. The project in it's current state consists of 2 parts which both work perfectly - the front-end and the smart contract. We will continue trying to combine these 2 parts even after the hackathon, because we truly believe ZillaPot can be great. We want to extend a huge thank you to all the developers who helped us on telegran
+
+
+
 <!-- ABOUT THE PROJECT -->
 # About The Project
-ZillaPot is a virtual crypto casino built for the Zilliqa chain. The concept revolves around pots. The idea is a user creates a pot which starts a clock, when this clock expires the last person to deposit gets the whole pot. The catch is that there is an minimum deposit amount which increases each deposit aswell as the remaining time increases per deposit.
+ZillaPot is a crypto game with gambling aspects built for the Zilliqa chain. The concept revolves around pots. The idea is a user creates a pot which starts a clock, when this clock expires the last person to deposit gets the whole pot. The catch is that there is a minimum deposit amount which increases each deposit aswell as the remaining time increases per deposit.
 
 
 # Project goals
@@ -157,7 +165,7 @@ In the profile page the user can view their stats such as how many pots they hav
 
 ## Demo
 
-You can try out ZillaPot without installing it locally [here](https://example.com). Simply log in with ZilPay and have fun!
+You can try out ZillaPot without installing it locally [here](https://zilla-pot.vercel.app/). Simply log in with ZilPay and have fun!
 
 
 ## Prerequisites
