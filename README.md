@@ -52,10 +52,9 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-     <a href="#important-notice">Important Notice</a>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#project-gaols">Project Goals</a></li>
+        <li><a href="#project-goals">Project Goals</a></li>
         <li><a href="#features">Features</a></li>
         <li><a href="#pages">Pages</a></li>
         <li><a href="#built-with">Built With</a></li>
@@ -73,12 +72,6 @@
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
-
-
-
-# Important notice
-When we set out to create ZillaPot we split the enourmous task between the two of us, one to handle the front-end and the other to ambiciously learn Scilla and create the smart contract. But as time went on and the front-end was almost complete, we hit a few roadblocks - combining the two. Even after reading all the docs, checking out other projects and asking for help from other Scilla developers, we couldn't hack it. Either due to our lack of knowledge of Scilla or too high ambitions we couldn't combine the two without making major sacrifices to the front-end. The contract is perfectly working, being able to create and deposit to pots, but lacking features to power some of our more ambitious front-end features such as pot history, profile stats and user specific pot displaying. Without these features ZillaPot would be incomplete. The project in it's current state consists of 2 parts which both work perfectly - the front-end and the smart contract. We will continue trying to combine these 2 parts even after the hackathon, because we truly believe ZillaPot can be great. We want to extend a huge thank you to all the developers who helped us on telegran
-
 
 
 <!-- ABOUT THE PROJECT -->
